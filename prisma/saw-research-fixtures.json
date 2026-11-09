@@ -1,0 +1,122 @@
+[
+  {
+    "researchCode": "A01",
+    "sourceRow": 2,
+    "name": "Kost Noeks Cinere Depok",
+    "address": "Cinere",
+    "roomSize": "2.5 x 3 meter",
+    "price": 1700000,
+    "rating": 1.9,
+    "genderType": "PUTRI",
+    "referenceDistanceKm": 9,
+    "transit": "Ojol/Motor / Angkot",
+    "description": "Tidak termasuk listrik; AC; Kasur; Meja; Lemari Baju; Kursi; Bantal; Cermin; K. Mandi Dalam; Kloset Duduk; Wastafel; Shower; Parkir Motor",
+    "facilityIndicators": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  {
+    "researchCode": "A02",
+    "sourceRow": 3,
+    "name": "Kost Pondok Rindang Tipe C Beji Depok",
+    "address": "Beji",
+    "roomSize": "3 x 3 meter",
+    "price": 1500000,
+    "rating": 3.4,
+    "genderType": "PUTRA",
+    "referenceDistanceKm": 0.6,
+    "transit": "Jalan kaki",
+    "description": "Tidak termasuk listrik; AC; Kasur; Meja; Lemari Baju; Kursi; Wastafel; K. Mandi Dalam; Kloset Duduk; Shower; WiFi; Kulkas; R. Tamu; R. Makan; R. Jemur; R. Santai; Dapur; TV; Balcon; Parkir Mobil; Parkir Motor",
+    "facilityIndicators": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1
+    ]
+  },
+  {
+    "researchCode": "A03",
+    "sourceRow": 30,
+    "name": "Kost Singgahsini Taman Bunga Tipe C Cimanggis Depok",
+    "address": "Cimanggis",
+    "roomSize": "3.5 x 3 meter",
+    "price": 2000000,
+    "rating": 4.5,
+    "genderType": "PUTRI",
+    "referenceDistanceKm": 1.9,
+    "transit": "Jalan kaki / Ojol/Motor / Angkot",
+    "description": "Tidak termasuk listrik; AC; Kasur; Meja; Lemari Baju; Kursi; Jendela; Cermin; Bantal; K. Mandi Dalam; Kloset Duduk; Shower; Air panas; WiFi; R. Cuci; Kulkas; R. Tamu; Penjaga Kos; R. Makan; R. Jemur; Dapur; CCTV; Parkir Mobil; Parkir Motor & Sepeda",
+    "facilityIndicators": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "researchCode": "A04",
+    "sourceRow": 182,
+    "name": "Kost Singgahsini DFlory Tipe B Cinere Depok",
+    "address": "Cinere",
+    "roomSize": "3.7 x 2.7 meter",
+    "price": 2025000,
+    "rating": 5,
+    "genderType": "PUTRI",
+    "referenceDistanceKm": 7.7,
+    "transit": "Ojol/Motor / Angkot",
+    "description": "Tidak termasuk listrik; AC; Kasur; Meja; Lemari Baju; Kursi; Bantal; Jendela; Cermin; Guling; K. Mandi Dalam; Kloset Duduk; Shower; WiFi; R. Cuci; Kulkas; R. Tamu; Mesin Cuci; Penjaga Kos; R. Jemur; Dapur; Dispenser; Taman; Parkir Mobil; Parkir Motor & Sepeda",
+    "facilityIndicators": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1
+    ]
+  },
+  {
+    "researchCode": "A05",
+    "sourceRow": 226,
+    "name": "Kost Rumah Nimas Sawangan Depok",
+    "address": "Sawangan",
+    "roomSize": "3 x 4 meter",
+    "price": 1000000,
+    "rating": null,
+    "genderType": "PUTRI",
+    "referenceDistanceKm": 12.9,
+    "transit": "Ojol/Motor / Angkot",
+    "description": "Tidak termasuk listrik; AC; Kasur; Meja; Lemari Baju; Kursi; K. Mandi Dalam; Kloset Duduk; Shower; WiFi; Kulkas; R. Jemur; Dapur; CCTV; Jemuran; Parkir Motor",
+    "facilityIndicators": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1
+    ]
+  }
+]

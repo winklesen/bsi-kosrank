@@ -518,12 +518,11 @@ export default function LandingPageInteractive({ initialKos, totalKos }: Landing
             {/* Criteria Progress */}
             <div className="space-y-3 mb-5">
               {[
-                { name: "C1 Harga Sewa (Cost)", weight: 30, desc: "Harga sewa bulanan kos" },
-                { name: "C2 Jarak ke Kampus (Cost)", weight: 20, desc: "Jarak terdekat ke titik acuan" },
-                { name: "C3 Ukuran Kamar (Benefit)", weight: 15, desc: "Dimensi luas kamar tidur" },
-                { name: "C4 Fasilitas Kamar (Benefit)", weight: 15, desc: "Jumlah fasilitas kamar tidur" },
-                { name: "C5 Fasilitas Umum (Benefit)", weight: 10, desc: "Fasilitas penunjang bersama" },
-                { name: "C6 Akses Transportasi (Benefit)", weight: 10, desc: "Kemudahan angkutan & transit" },
+                { name: "C1 Harga (Cost)", weight: 30, desc: "Harga sewa bulanan kos" },
+                { name: "C2 Fasilitas (Benefit)", weight: 30, desc: "Kelengkapan dari sembilan indikator fasilitas" },
+                { name: "C3 Jarak (Cost)", weight: 20, desc: "Jarak ke titik acuan kampus" },
+                { name: "C4 Ukuran Ruangan (Benefit)", weight: 10, desc: "Dimensi luas kamar tidur" },
+                { name: "C5 Rating (Benefit)", weight: 10, desc: "Penilaian penghuni kos" },
               ].map((c) => (
                 <div key={c.name} className="space-y-1">
                   <div className="flex justify-between text-[12px] font-semibold text-ink-900">

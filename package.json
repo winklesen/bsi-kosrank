@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:saw": "tsx --test tests/saw/model.test.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

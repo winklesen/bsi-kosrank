@@ -33,7 +33,7 @@ export default async function PerhitunganPage({
   });
 
   // Run SAW calculation (filtered or all)
-  const { criteriaList, scoreMatrix, normalMatrix, ranked } =
+  const { criteriaList, scoreMatrix, normalMatrix, ranked, skipped } =
     await getSAWCalculationDetails(selectedKosIds.length > 0 ? selectedKosIds : undefined);
 
   if (allKos.length === 0) {
@@ -77,6 +77,13 @@ export default async function PerhitunganPage({
         allKos={allKos}
         selectedIds={selectedKosIds}
       />
+
+      {skipped.length > 0 && (
+        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+          {skipped.length} kos tidak dihitung karena data belum lengkap (fasilitas, ukuran kamar, atau harga tidak valid):{" "}
+          {skipped.map((k) => k.name).join(", ")}.
+        </p>
+      )}
 
       {/* SAW Calculation Result */}
       {ranked.length === 0 ? (

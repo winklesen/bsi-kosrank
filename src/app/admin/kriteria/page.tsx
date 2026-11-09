@@ -15,7 +15,9 @@ export default async function KriteriaPage() {
     orderBy: { code: "asc" },
   });
 
-  const totalWeight = criteria.reduce((s, c) => s + c.weight, 0);
+  // Mesin SAW hanya menghitung C1–C5; kriteria lain tidak memengaruhi total bobot.
+  const activeCodes = ["C1", "C2", "C3", "C4", "C5"];
+  const totalWeight = criteria.filter((c) => activeCodes.includes(c.code)).reduce((s, c) => s + c.weight, 0);
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
@@ -29,6 +31,10 @@ export default async function KriteriaPage() {
           {totalWeight.toFixed(2) !== "1.00" && (
             <span className="text-red-500 ml-2">(harus = 1.00)</span>
           )}
+        </p>
+        <p className="text-slate-500 text-xs mt-2">
+          Mesin SAW menghitung tepat lima kriteria (C1–C5) dengan bobot dari tabel ini. Atribut COST/BENEFIT
+          mengikuti definisi riset, dan kriteria dengan kode lain tidak ikut dihitung.
         </p>
       </div>
 
@@ -91,7 +97,7 @@ export default async function KriteriaPage() {
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <Label className="text-xs font-semibold text-ink-500">Kode Kriteria</Label>
-                <Input name="code" placeholder="C6" required className="h-9 rounded-xl text-sm" />
+                <Input name="code" placeholder="C1" required className="h-9 rounded-xl text-sm" />
               </div>
               <div className="space-y-1">
                 <Label className="text-xs font-semibold text-ink-500">Bobot W (0-1)</Label>
@@ -100,7 +106,7 @@ export default async function KriteriaPage() {
             </div>
             <div className="space-y-1">
               <Label className="text-xs font-semibold text-ink-500">Nama Kriteria</Label>
-              <Input name="name" placeholder="Fasilitas Kos" required className="h-9 rounded-xl text-sm" />
+              <Input name="name" placeholder="Harga" required className="h-9 rounded-xl text-sm" />
             </div>
             <div className="space-y-1">
               <Label className="text-xs font-semibold text-ink-500">Atribut Kriteria</Label>

@@ -210,7 +210,7 @@ export default async function KosDetailPage({
                 </div>
               </div>
               <div className="mt-3 pt-3 border-t border-brand-600/20 text-[11px] text-ink-500 leading-relaxed">
-                Skor kecocokan dihitung dari bobot kriteria Harga (30%), Jarak (20%), Fasilitas Kamar (15%), Fasilitas Umum (10%), dll.
+                Skor kecocokan dihitung dari bobot kriteria Harga (30%), Fasilitas (30%), Jarak (20%), Ukuran Ruangan (10%), dan Rating (10%).
               </div>
             </div>
           )}

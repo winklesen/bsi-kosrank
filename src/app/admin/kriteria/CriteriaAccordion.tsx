@@ -48,6 +48,10 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
         <Sliders className="w-5 h-5 text-brand-700" />
         <h2 className="font-display font-semibold tracking-[-0.02em] text-ink-900 text-sm">Kelola Detail Sub-Kriteria (Data C)</h2>
       </div>
+      <p className="text-[11px] text-slate-500 px-1 -mt-2">
+        Sub-kriteria adalah dokumentasi rentang skor riset. Skor dihitung mesin SAW dari aturan tetap,
+        sehingga perubahan di sini tidak memengaruhi perhitungan.
+      </p>
 
       {criteria.map((c) => {
         const isOpen = !!openSections[c.id];

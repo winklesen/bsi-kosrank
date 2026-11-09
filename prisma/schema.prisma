@@ -38,6 +38,9 @@ model Kos {
   phone       String?
   transit     String     @default("Ojek online/kendaraan pribadi")
   isActive    Boolean    @default(true)
+  rating              Float?
+  referenceDistanceKm Float?
+  facilityIndicators  Int[]      @default([])
   finalScore  Float?
   ranking     Int?
   createdAt   DateTime   @default(now())

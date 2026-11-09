@@ -126,10 +126,10 @@ export function PerhitunganAccordion({
   const steps = [
     {
       title: "1. Bobot Preferensi (W)",
-      description: "Bobot prioritas untuk masing-masing kriteria penilaian (C1 - C6).",
+      description: "Bobot prioritas untuk masing-masing kriteria penilaian (C1 - C5).",
       icon: BarChart3,
       render: () => (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 p-6 bg-surface-muted/30">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 p-6 bg-surface-muted/30">
           {criteriaList.map((c) => (
             <div key={c.id} className="bg-white rounded-xl border border-border p-4 text-center shadow-sm">
               <div className="text-xs font-semibold text-ink-500 uppercase tracking-wider mb-1">{c.code}</div>
