@@ -1,0 +1,51 @@
+name: kosrank
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: kosrank
+      POSTGRES_USER: kosrank
+      POSTGRES_PASSWORD: ${KOSRANK_DB_PASSWORD:?Set KOSRANK_DB_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${KOSRANK_DB_PORT:-55439}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kosrank -d kosrank"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      default:
+        aliases:
+          - kosrank-web
+    environment:
+      DATABASE_URL: postgresql://kosrank:${KOSRANK_DB_PASSWORD}@db:5432/kosrank
+      AUTH_SECRET: ${AUTH_SECRET:?Set AUTH_SECRET in .env}
+    ports:
+      - "127.0.0.1:${KOSRANK_APP_PORT:-3101}:3000"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./prisma:/app/prisma
+
+  e2e:
+    profiles: [test]
+    build:
+      context: .
+      dockerfile: Dockerfile.e2e
+    depends_on:
+      - app
+    environment:
+      PLAYWRIGHT_BASE_URL: http://kosrank-web:3000
+      E2E_TEST_SEEDED: ${E2E_TEST_SEEDED:-0}
+
+volumes:
+  db_data:

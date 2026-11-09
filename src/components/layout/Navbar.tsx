@@ -22,7 +22,7 @@ export function Navbar() {
   const { data: session } = useSession();
   const role = (session?.user as any)?.role;
 
-  const dashboardLink = role === "SUPER_ADMIN" ? "/admin" : role === "SELLER" ? "/seller" : "/dashboard";
+  const dashboardLink = role === "SUPER_ADMIN" ? "/admin" : role === "SELLER" ? "/seller" : null;
 
   return (
     <header className="w-full flex flex-col z-50 sticky top-0">
@@ -149,14 +149,16 @@ export function Navbar() {
                       </div>
 
                       <div className="px-1.5 space-y-0.5">
-                        <Link
-                          href={dashboardLink}
-                          onClick={() => setDropOpen(false)}
-                          className="flex items-center gap-2 px-3 py-2 text-[13px] rounded-lg hover:bg-surface-tint hover:text-brand-700 transition-colors"
-                        >
-                          <LayoutDashboard className="w-4 h-4 text-ink-500" />
-                          <span>Dashboard</span>
-                        </Link>
+                        {dashboardLink && (
+                          <Link
+                            href={dashboardLink}
+                            onClick={() => setDropOpen(false)}
+                            className="flex items-center gap-2 px-3 py-2 text-[13px] rounded-lg hover:bg-surface-tint hover:text-brand-700 transition-colors"
+                          >
+                            <LayoutDashboard className="w-4 h-4 text-ink-500" />
+                            <span>Dashboard</span>
+                          </Link>
+                        )}
 
                         <Link
                           href="/profile"
@@ -249,13 +251,15 @@ export function Navbar() {
             </Link>
           ) : (
             <>
-              <Link
-                href={dashboardLink}
-                className="text-[13px] font-medium py-2 px-3 hover:bg-surface-tint hover:text-brand-700 rounded-lg"
-                onClick={() => setOpen(false)}
-              >
-                Dashboard
-              </Link>
+              {dashboardLink && (
+                <Link
+                  href={dashboardLink}
+                  className="text-[13px] font-medium py-2 px-3 hover:bg-surface-tint hover:text-brand-700 rounded-lg"
+                  onClick={() => setOpen(false)}
+                >
+                  Dashboard
+                </Link>
+              )}
               <Link
                 href="/profile"
                 className="text-[13px] font-medium py-2 px-3 hover:bg-surface-tint hover:text-brand-700 rounded-lg"

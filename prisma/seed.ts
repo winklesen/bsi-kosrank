@@ -335,14 +335,7 @@ async function main() {
   // Recalculate SAW and update rank and finalScore in database before finishing
   await calculateAndUpdateSAWInSeed(prisma);
 
-  console.log('')
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-  console.log('📋 Akun tersedia:')
-  console.log('  Super Admin: superadmin@kosrank.com / admin123')
-  console.log('  Seller 1:    seller1@kosrank.com   / seller123')
-  console.log('  Seller 2:    seller2@kosrank.com   / seller123')
-  console.log('  User:        user@kosrank.com       / user123')
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  console.log('✅ Sample accounts seeded (credentials omitted from logs)')
 }
 
 function calculateDistance(

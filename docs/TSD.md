@@ -302,6 +302,8 @@ Engine saat ini membaca **bobot/atribut dinamis** dari tabel `Criteria`, tetapi 
 
 ### 8.4 Environment
 
+Untuk Docker lokal, `.env.example` memuat nama variabel wajib `KOSRANK_DB_PASSWORD` dan `AUTH_SECRET` tanpa nilai. Compose menyusun `DATABASE_URL` internal menuju service `db:5432`; port host default PostgreSQL adalah `127.0.0.1:55439`. Port web default `127.0.0.1:3101`. Langkah setup dan penghentian ada di [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md).
+
 ```env
 DATABASE_URL=postgresql://...        # Neon/Railway
 AUTH_SECRET=...                      # NextAuth v5
@@ -319,6 +321,8 @@ npx prisma db push     # sinkron skema
 npx prisma db seed     # seed kriteria + kos studi kasus
 tsx prisma/update-saw-seed.ts   # recompute ranking seed
 ```
+
+`prisma db seed` menghapus data dari beberapa tabel; jangan jalankan terhadap database yang datanya ingin dipertahankan. Setup Docker lokal memakai `prisma db push` hanya pada database baru milik proyek ini dan tidak menjalankan seed otomatis.
 
 ### 8.5 Deployment
 
