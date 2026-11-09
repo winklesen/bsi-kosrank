@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Ruler, Star, Check } from "lucide-react";
+import { MapPin, Star, Check } from "lucide-react";
 
 interface KosCardProps {
   kos: {
@@ -29,9 +29,9 @@ export function KosCard({ kos, distanceMeters, dynamicScore, dynamicRank }: KosC
   };
 
   const genderColor: Record<string, string> = {
-    PUTRA: "bg-blue-50 text-blue-700 border-blue-200",
-    PUTRI: "bg-pink-50 text-pink-700 border-pink-200",
-    CAMPUR: "bg-purple-50 text-purple-700 border-purple-200",
+    PUTRA: "bg-surface-tint text-[#3D6FED]",
+    PUTRI: "bg-[#FDEDF3] text-[#D14D8B]",
+    CAMPUR: "bg-brand-100 text-brand-700",
   };
 
   const imageUrl = kos.image || (kos.images && kos.images[0]?.url);
@@ -43,98 +43,93 @@ export function KosCard({ kos, distanceMeters, dynamicScore, dynamicRank }: KosC
   const starsCount = Math.round(scoreVal * 5);
 
   return (
-    <Link href={`/kos/${kos.slug}`} className="block h-full">
-      <div className="group bg-white rounded-lg border border-[#D5D9D9] hover:shadow-[0_2px_5px_rgba(15,17,17,0.08)] transition-all duration-200 p-3 h-full flex flex-col justify-between text-left">
-        {/* Image Container (centered, white background, square aspect ratio) */}
-        <div className="aspect-square w-full bg-white flex items-center justify-center overflow-hidden border border-[#F0F2F2] rounded-md relative mb-3">
+    <Link href={`/kos/${kos.slug}`} className="block h-full focus-visible:outline-2 focus-visible:outline-brand-600 rounded-xl">
+      <div className="group bg-surface-muted rounded-xl p-2 h-full flex flex-col transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_4px_16px_rgba(15,15,20,0.08)] text-left">
+        {/* Image (square, rounded — design.md §5.10) */}
+        <div className="aspect-square w-full bg-white flex items-center justify-center overflow-hidden rounded-lg relative mb-2.5">
           {imageUrl ? (
-            <img 
-              src={imageUrl} 
-              alt={kos.name} 
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" 
+            <img
+              src={imageUrl}
+              alt={`Foto ${kos.name}`}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
             />
           ) : (
-            <div className="flex flex-col items-center gap-2 text-slate-300">
-              <MapPin className="w-12 h-12" />
-              <span className="text-xs">Foto Kos</span>
+            <div className="flex flex-col items-center gap-2 text-ink-500/40 bg-surface-tint w-full h-full justify-center">
+              <MapPin className="w-10 h-10" />
+              <span className="text-[11px]">Foto Kos</span>
             </div>
           )}
-          
+
           {displayRank && (
-            <div className="absolute top-2 left-2 bg-[#CC5500] text-white text-[11px] font-bold px-2 py-0.5 rounded shadow-sm">
+            <div className="absolute top-2 left-2 bg-badge-blue text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
               RANK #{displayRank}
             </div>
           )}
 
-          {/* Gender Badge */}
-          <span className={`absolute bottom-2 right-2 text-[11px] px-2 py-0.5 rounded border font-semibold ${genderColor[kos.genderType]}`}>
+          {/* Gender badge */}
+          <span className={`absolute bottom-2 right-2 text-[10px] px-2 py-0.5 rounded-full font-semibold ${genderColor[kos.genderType]}`}>
             {genderLabel[kos.genderType]}
           </span>
         </div>
 
-        {/* Content Area */}
-        <div className="flex-grow flex flex-col justify-between">
+        {/* Content */}
+        <div className="flex-grow flex flex-col justify-between px-1 pb-1">
           <div className="space-y-1">
-            {/* Title (max 3 lines, normal weight, 18px font-sans) */}
-            <h3 className="font-sans text-[15px] md:text-[16px] leading-[20px] text-[#0F1111] hover:text-[#007185] line-clamp-3 mb-1 font-normal">
+            <h3 className="font-display text-[13px] leading-[18px] text-ink-900 line-clamp-2 font-semibold group-hover:text-brand-600 transition-colors">
               {kos.name}
             </h3>
 
-            {/* Stars Rating and Score info */}
-            <div className="flex items-center gap-1.5 text-xs">
-              <div className="flex items-center text-[#FF9900]">
+            {/* Rating (score → stars) */}
+            <div className="flex items-center gap-1.5 text-[11px]">
+              <div className="flex items-center text-star" aria-hidden="true">
                 {[...Array(5)].map((_, i) => (
-                  <Star 
-                    key={i} 
-                    className={`w-3.5 h-3.5 ${i < starsCount ? "fill-[#FF9900] text-[#FF9900]" : "text-slate-200"}`} 
+                  <Star
+                    key={i}
+                    className={`w-3 h-3 ${i < starsCount ? "fill-star text-star" : "text-line"}`}
                   />
                 ))}
               </div>
-              <span className="text-[#007185] font-semibold hover:underline cursor-pointer">
+              <span className="text-brand-600 font-semibold">
                 {scoreVal ? `${(scoreVal * 100).toFixed(0)}% Cocok` : "N/A"}
               </span>
             </div>
 
-            {/* Campus / Location Details */}
-            <div className="text-[13px] text-[#565959] space-y-0.5 pt-1">
+            {/* Location meta */}
+            <div className="text-[11px] text-ink-500 space-y-0.5 pt-0.5">
               <div className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                <MapPin className="w-3 h-3 flex-shrink-0" />
                 <span className="truncate">{kos.campus}</span>
               </div>
               {distanceMeters !== undefined && (
-                <div className="text-[12px] font-semibold text-[#067D62]">
-                  Jarak: {distanceMeters >= 1000 
-                    ? `${(distanceMeters / 1000).toFixed(1)} km` 
-                    : `${distanceMeters} m`} dari kampus
+                <div className="text-[11px] font-semibold text-eco">
+                  {distanceMeters >= 1000
+                    ? `${(distanceMeters / 1000).toFixed(1)} km`
+                    : `${distanceMeters} m`}{" "}
+                  dari titik acuan
                 </div>
               )}
-              <div className="text-[12px] text-[#565959]">
-                Ukuran Kamar: {kos.roomSize}
-              </div>
             </div>
           </div>
 
-          <div className="pt-3 mt-2 border-t border-[#F0F2F2]">
-            {/* Price (21px font-bold, text-primary/near-black) */}
-            <div className="flex items-baseline gap-0.5 text-[#0F1111] mb-1">
-              <span className="text-[13px] font-normal align-super">Rp</span>
-              <span className="text-[21px] font-bold leading-none">
+          <div className="pt-2.5 mt-1.5 border-t border-line">
+            {/* Price row */}
+            <div className="flex items-baseline gap-0.5 text-ink-900">
+              <span className="text-[11px] font-normal">Rp</span>
+              <span className="text-[16px] font-bold leading-none font-display">
                 {kos.price.toLocaleString("id-ID")}
               </span>
-              <span className="text-[12px] text-[#565959] font-normal ml-0.5">/bulan</span>
+              <span className="text-[10px] text-ink-500 font-normal ml-0.5">/bulan</span>
             </div>
 
-            {/* Verified "Prime-style" badge */}
-            <div className="flex items-center gap-1 mb-2">
-              <div className="bg-[#007185] text-white p-0.5 rounded-full flex items-center justify-center w-3.5 h-3.5">
-                <Check className="w-2.5 h-2.5 stroke-[3]" />
-              </div>
-              <span className="text-[12px] font-bold text-[#007185]">SAW Teratas</span>
-            </div>
-
-            {/* Delivery/Survey availability in Text Primary */}
-            <div className="text-[13px] text-[#0F1111]">
-              Survei: <span className="font-semibold text-[#067D62]">Bisa Hari Ini</span>
+            {/* Meta row */}
+            <div className="flex items-center justify-between mt-1.5">
+              <span className="text-[10px] text-ink-500">Ukuran: {kos.roomSize}</span>
+              <span className="flex items-center gap-1 text-[10px] font-semibold text-brand-700">
+                <span className="bg-brand-700 text-white p-0.5 rounded-full flex items-center justify-center w-3 h-3">
+                  <Check className="w-2 h-2 stroke-[3]" />
+                </span>
+                SAW
+              </span>
             </div>
           </div>
         </div>

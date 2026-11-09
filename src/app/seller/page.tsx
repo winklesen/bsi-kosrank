@@ -21,7 +21,7 @@ export default async function SellerDashboardPage() {
     <div className="p-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">Halo, {session?.user?.name}! 👋</h1>
+          <h1 className="font-display text-[26px] md:text-[30px] font-bold tracking-[-0.02em]">Halo, {session?.user?.name}! 👋</h1>
           <p className="text-muted-foreground text-sm mt-1">Kelola listing kos Anda dari sini</p>
         </div>
         <Link href="/seller/kos/new">
@@ -43,7 +43,7 @@ export default async function SellerDashboardPage() {
           </div>
         </div>
         <div className="bg-white rounded-2xl border border-border p-5 flex items-center gap-4">
-          <div className="w-11 h-11 bg-teal-500 rounded-xl flex items-center justify-center">
+          <div className="w-11 h-11 bg-brand-600 rounded-xl flex items-center justify-center">
             <TrendingUp className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -52,7 +52,7 @@ export default async function SellerDashboardPage() {
           </div>
         </div>
         <div className="bg-white rounded-2xl border border-border p-5 flex items-center gap-4">
-          <div className="w-11 h-11 bg-amber-500 rounded-xl flex items-center justify-center">
+          <div className="w-11 h-11 bg-star rounded-xl flex items-center justify-center">
             <Star className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -65,7 +65,7 @@ export default async function SellerDashboardPage() {
       {/* My Kos List */}
       <div className="bg-white rounded-2xl border border-border overflow-hidden">
         <div className="px-5 py-4 border-b border-border flex items-center justify-between">
-          <h2 className="font-semibold">Listing Kos Saya</h2>
+          <h2 className="font-display font-semibold tracking-[-0.02em]">Listing Kos Saya</h2>
           <Link href="/seller/kos">
             <Button variant="ghost" size="sm" className="rounded-xl text-xs">Lihat Semua</Button>
           </Link>
@@ -73,7 +73,7 @@ export default async function SellerDashboardPage() {
         {myKos.length > 0 ? (
           <div className="divide-y divide-border">
             {myKos.slice(0, 5).map((kos) => (
-              <div key={kos.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-slate-50 transition-colors">
+              <div key={kos.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-surface-muted transition-colors">
                 <div className="flex-1 min-w-0">
                   <div className="font-medium text-sm truncate">{kos.name}</div>
                   <div className="text-xs text-muted-foreground">Rp {kos.price.toLocaleString("id-ID")}/bulan · {kos.campus}</div>

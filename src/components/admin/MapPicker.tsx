@@ -137,8 +137,8 @@ export default function MapPicker({
       const customIcon = L.divIcon({
         html: `
           <div class="relative flex items-center justify-center">
-            <span class="absolute inline-flex h-8 w-8 animate-ping rounded-full bg-orange-400 opacity-75"></span>
-            <div class="relative bg-[#FF9900] text-white rounded-full p-2 shadow-lg border-2 border-white">
+            <span class="absolute inline-flex h-8 w-8 animate-ping rounded-full bg-brand-600 opacity-75"></span>
+            <div class="relative bg-brand-600 text-white rounded-full p-2 shadow-lg border-2 border-white">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
           </div>
@@ -241,7 +241,7 @@ export default function MapPicker({
       {/* Search Bar */}
       <div className="flex gap-2">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-450" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-500" />
           <input
             type="text"
             placeholder="Cari lokasi/daerah (Contoh: Condong Catur, Margonda...)"
@@ -255,20 +255,20 @@ export default function MapPicker({
               // Delay to allow clicking suggestion button
               setTimeout(() => setShowSuggestions(false), 200);
             }}
-            className="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#FF9900]/20 focus:border-[#FF9900]"
+            className="w-full border border-line rounded-xl pl-10 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600"
           />
 
           {/* Autocomplete suggestions dropdown */}
           {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-100 rounded-xl shadow-xl z-30 max-h-56 overflow-y-auto divide-y divide-slate-50">
+            <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-line rounded-xl shadow-xl z-30 max-h-56 overflow-y-auto divide-y divide-line">
               {suggestions.map((item) => (
                 <button
                   key={item.place_id || item.osm_id}
                   type="button"
                   onClick={() => handleSelectSuggestion(item)}
-                  className="w-full text-left px-3.5 py-2.5 text-xs text-slate-650 hover:bg-slate-50 flex items-start gap-2 transition-colors cursor-pointer"
+                  className="w-full text-left px-3.5 py-2.5 text-xs text-ink-700 hover:bg-surface-muted flex items-start gap-2 transition-colors cursor-pointer"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
+                  <MapPin className="w-3.5 h-3.5 text-ink-500 mt-0.5 shrink-0" />
                   <span className="line-clamp-2">{item.display_name}</span>
                 </button>
               ))}
@@ -277,7 +277,7 @@ export default function MapPicker({
 
           {isSuggesting && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              <Loader2 className="w-3.5 h-3.5 text-slate-400 animate-spin" />
+              <Loader2 className="w-3.5 h-3.5 text-ink-500 animate-spin" />
             </div>
           )}
         </div>
@@ -285,7 +285,7 @@ export default function MapPicker({
           type="button"
           onClick={triggerSearch}
           disabled={isSearching}
-          className="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-800 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-70"
+          className="bg-brand-700 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-brand-600 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-70"
         >
           {isSearching ? (
             <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -299,18 +299,18 @@ export default function MapPicker({
       </div>
 
       {/* Map Element */}
-      <div className="relative w-full h-[220px] rounded-2xl overflow-hidden border border-slate-100 shadow-inner bg-slate-50">
+      <div className="relative w-full h-[220px] rounded-2xl overflow-hidden border border-line shadow-inner bg-surface-muted">
         <div ref={mapContainerRef} className="w-full h-full z-10" />
 
         {/* Floating coordinates badge */}
-        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md border border-slate-100 rounded-xl px-3 py-1.5 text-[10px] font-mono text-slate-650 z-20 flex gap-3 shadow-md">
+        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md border border-line rounded-xl px-3 py-1.5 text-[10px] font-mono text-ink-700 z-20 flex gap-3 shadow-md">
           <div>
-            <span className="text-slate-400 font-semibold uppercase mr-1">LAT:</span>
+            <span className="text-ink-500 font-semibold uppercase mr-1">LAT:</span>
             <span>{coords.lat}</span>
           </div>
-          <div className="border-l border-slate-200 h-3.5 my-auto" />
+          <div className="border-l border-line h-3.5 my-auto" />
           <div>
-            <span className="text-slate-400 font-semibold uppercase mr-1">LNG:</span>
+            <span className="text-ink-500 font-semibold uppercase mr-1">LNG:</span>
             <span>{coords.lng}</span>
           </div>
         </div>

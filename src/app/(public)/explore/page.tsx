@@ -89,19 +89,18 @@ export default async function ExplorePage({
   };
 
   return (
-    <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-6 font-sans text-left text-[#0F1111]">
+    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 text-left text-ink-900">
       {/* Search Header */}
-      <div className="mb-6 border-b border-[#F0F2F2] pb-4">
-        {/* Page Title: Source Sans 3 28px/36px, weight 700 */}
-        <h1 className="text-[28px] leading-[36px] font-bold text-[#0F1111] tracking-tight">
+      <div className="mb-6 border-b border-line pb-4">
+        <h1 className="font-display text-[26px] md:text-[30px] leading-[1.2] font-bold tracking-[-0.02em] text-ink-900">
           Eksplor Pilihan Tempat Kos
         </h1>
         {totalCount > 0 ? (
-          <p className="text-[13px] text-[#565959] mt-0.5">
-            Menampilkan <span className="font-bold text-[#0F1111]">{(page - 1) * itemsPerPage + 1}-{Math.min(page * itemsPerPage, totalCount)}</span> dari <span className="font-bold text-[#0F1111]">{totalCount}</span> tempat kos di Condong Catur
+          <p className="text-[12px] text-ink-500 mt-1">
+            Menampilkan <span className="font-semibold text-ink-900">{(page - 1) * itemsPerPage + 1}-{Math.min(page * itemsPerPage, totalCount)}</span> dari <span className="font-semibold text-ink-900">{totalCount}</span> tempat kos di Condong Catur
           </p>
         ) : (
-          <p className="text-[13px] text-[#565959] mt-0.5">Tidak ada tempat kos yang cocok dengan kriteria pencarian Anda.</p>
+          <p className="text-[12px] text-ink-500 mt-1">Tidak ada tempat kos yang cocok dengan kriteria pencarian Anda.</p>
         )}
       </div>
 
@@ -121,25 +120,29 @@ export default async function ExplorePage({
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-20 bg-[#F0F2F2] rounded-lg border border-[#D5D9D9] text-[#565959]">
-                <MapPin className="w-12 h-12 mb-3 opacity-30 text-slate-400" />
-                <p className="font-bold text-[14px] text-[#0F1111]">Tidak ada kos ditemukan</p>
-                <p className="text-xs text-[#565959] mt-0.5">Coba ubah filter kecamatan, gender, atau harga Anda.</p>
+              <div className="flex flex-col items-center justify-center py-20 bg-surface-tint rounded-2xl border border-line text-ink-500">
+                <MapPin className="w-12 h-12 mb-3 opacity-30" />
+                <p className="font-display font-semibold text-[14px] text-ink-900">Tidak ada kos ditemukan</p>
+                <p className="text-xs mt-0.5">Coba ubah filter kecamatan, gender, atau harga Anda.</p>
               </div>
             )}
           </div>
 
-          {/* Pagination Controls (Amazon style) */}
+          {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-8 pt-6 border-t border-[#F0F2F2]">
+            <div className="flex items-center justify-center gap-2 mt-8 pt-6 border-t border-line">
               {page > 1 ? (
-                <Link href={createPageHref(page - 1)}>
-                  <button className="h-[32px] px-3 border border-[#D5D9D9] bg-white rounded hover:bg-[#F7FAFA] text-[#0F1111] text-[13px] flex items-center justify-center cursor-pointer transition-colors shadow-sm font-semibold">
-                    <ChevronLeft className="h-4 w-4 mr-0.5 text-slate-600" /> Prev
-                  </button>
+                <Link
+                  href={createPageHref(page - 1)}
+                  className="h-8 px-3 border border-line bg-white rounded-lg hover:border-brand-600 hover:text-brand-600 text-ink-900 text-[13px] font-semibold flex items-center justify-center cursor-pointer transition-colors"
+                >
+                  <ChevronLeft className="h-4 w-4 mr-0.5" /> Prev
                 </Link>
               ) : (
-                <button className="h-[32px] px-3 border border-[#D5D9D9] bg-white opacity-50 rounded text-slate-400 text-[13px] flex items-center justify-center cursor-not-allowed shadow-sm font-semibold" disabled>
+                <button
+                  className="h-8 px-3 border border-line bg-white opacity-50 rounded-lg text-ink-500 text-[13px] font-semibold flex items-center justify-center cursor-not-allowed"
+                  disabled
+                >
                   <ChevronLeft className="h-4 w-4 mr-0.5" /> Prev
                 </button>
               )}
@@ -147,19 +150,19 @@ export default async function ExplorePage({
               <div className="flex items-center gap-1.5">
                 {getPageNumbers().map((p, idx) => (
                   typeof p === "number" ? (
-                    <Link key={idx} href={createPageHref(p)}>
-                      <button
-                        className={`h-[32px] w-[32px] rounded text-[13px] flex items-center justify-center cursor-pointer transition-colors shadow-sm ${
-                          p === page 
-                            ? "border-2 border-[#E77600] text-[#E77600] bg-white font-bold" 
-                            : "border border-[#D5D9D9] bg-white hover:bg-[#F7FAFA] text-[#0F1111]"
-                        }`}
-                      >
-                        {p}
-                      </button>
+                    <Link
+                      key={idx}
+                      href={createPageHref(p)}
+                      className={`h-8 w-8 rounded-lg text-[13px] flex items-center justify-center cursor-pointer transition-colors ${
+                        p === page
+                          ? "bg-brand-700 text-white font-semibold"
+                          : "border border-line bg-white hover:border-brand-600 hover:text-brand-600 text-ink-900"
+                      }`}
+                    >
+                      {p}
                     </Link>
                   ) : (
-                    <span key={idx} className="px-1 text-slate-400 text-sm font-semibold select-none">
+                    <span key={idx} className="px-1 text-ink-500 text-sm font-semibold select-none">
                       {p}
                     </span>
                   )
@@ -167,13 +170,17 @@ export default async function ExplorePage({
               </div>
 
               {page < totalPages ? (
-                <Link href={createPageHref(page + 1)}>
-                  <button className="h-[32px] px-3 border border-[#D5D9D9] bg-white rounded hover:bg-[#F7FAFA] text-[#0F1111] text-[13px] flex items-center justify-center cursor-pointer transition-colors shadow-sm font-semibold">
-                    Next <ChevronRight className="h-4 w-4 ml-0.5 text-slate-600" />
-                  </button>
+                <Link
+                  href={createPageHref(page + 1)}
+                  className="h-8 px-3 border border-line bg-white rounded-lg hover:border-brand-600 hover:text-brand-600 text-ink-900 text-[13px] font-semibold flex items-center justify-center cursor-pointer transition-colors"
+                >
+                  Next <ChevronRight className="h-4 w-4 ml-0.5" />
                 </Link>
               ) : (
-                <button className="h-[32px] px-3 border border-[#D5D9D9] bg-white opacity-50 rounded text-slate-400 text-[13px] flex items-center justify-center cursor-not-allowed shadow-sm font-semibold" disabled>
+                <button
+                  className="h-8 px-3 border border-line bg-white opacity-50 rounded-lg text-ink-500 text-[13px] font-semibold flex items-center justify-center cursor-not-allowed"
+                  disabled
+                >
                   Next <ChevronRight className="h-4 w-4 ml-0.5" />
                 </button>
               )}

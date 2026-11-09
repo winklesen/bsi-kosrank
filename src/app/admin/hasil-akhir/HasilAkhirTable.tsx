@@ -37,7 +37,7 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
       <div className="print:hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left border-collapse">
-            <thead className="text-xs uppercase bg-slate-50 text-slate-500 border-b border-border">
+            <thead className="text-xs uppercase bg-surface-muted text-ink-500 border-b border-border">
               <tr>
                 <th className="px-6 py-4 font-bold text-center w-24">Peringkat</th>
                 <th className="px-6 py-4 font-bold">Nama Kos</th>
@@ -50,24 +50,24 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
               {paginatedItems.map((item, index) => {
                 const actualRank = startIndex + index + 1;
                 return (
-                  <tr key={item.kos.id} className="hover:bg-slate-50/50 transition-colors">
+                  <tr key={item.kos.id} className="hover:bg-surface-muted/50 transition-colors">
                     <td className="px-6 py-4 text-center">
                       <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${
                         actualRank === 1 
-                          ? "bg-gradient-to-r from-amber-500 to-[#FF9900] text-white" 
+                          ? "bg-star text-ink-900" 
                           : actualRank === 2 
-                          ? "bg-slate-400 text-white" 
+                          ? "bg-badge-blue text-white" 
                           : actualRank === 3 
-                          ? "bg-amber-700 text-white" 
-                          : "bg-slate-100 text-slate-700 border border-slate-200"
+                          ? "bg-brand-600 text-white" 
+                          : "bg-surface-muted text-ink-700 border border-line"
                       }`}>
                         {actualRank}
                       </span>
                     </td>
-                    <td className="px-6 py-4 font-semibold text-slate-900">
+                    <td className="px-6 py-4 font-semibold text-ink-900">
                       {item.kos.name}
                     </td>
-                    <td className="px-6 py-4 text-slate-600">
+                    <td className="px-6 py-4 text-ink-700">
                       {item.kos.address}
                     </td>
                     <td className="px-6 py-4">
@@ -81,7 +81,7 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
                         {item.kos.genderType === "PUTRA" ? "Putra" : item.kos.genderType === "PUTRI" ? "Putri" : "Campur"}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-right font-extrabold text-[#CC5500] text-base">
+                    <td className="px-6 py-4 text-right font-bold text-brand-700 text-base">
                       {item.score.toFixed(4)}
                     </td>
                   </tr>
@@ -93,17 +93,17 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
 
         {/* PAGINATION CONTROLS */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-slate-50/50">
-            <div className="text-xs text-slate-500 font-medium">
-              Menampilkan <span className="font-semibold text-slate-700">{startIndex + 1}</span> -{" "}
-              <span className="font-semibold text-slate-700">{endIndex}</span> dari{" "}
-              <span className="font-semibold text-slate-700">{totalItems}</span> kos
+          <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-surface-muted/50">
+            <div className="text-xs text-ink-500 font-medium">
+              Menampilkan <span className="font-semibold text-ink-700">{startIndex + 1}</span> -{" "}
+              <span className="font-semibold text-ink-700">{endIndex}</span> dari{" "}
+              <span className="font-semibold text-ink-700">{totalItems}</span> kos
             </div>
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="p-1.5 rounded-lg border border-border bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-1.5 rounded-lg border border-border bg-white text-ink-700 hover:bg-surface-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 title="Halaman Sebelumnya"
               >
                 <ChevronLeft className="w-4.5 h-4.5" />
@@ -123,14 +123,14 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
                   return (
                     <div key={page} className="flex items-center">
                       {showEllipsis && (
-                        <span className="px-2 text-slate-400 text-xs select-none">...</span>
+                        <span className="px-2 text-ink-500 text-xs select-none">...</span>
                       )}
                       <button
                         onClick={() => setCurrentPage(page)}
                         className={`min-w-[32px] h-8 px-2 rounded-lg text-xs font-semibold transition-colors ${
                           currentPage === page
-                            ? "bg-[#FF9900] text-white"
-                            : "border border-border bg-white text-slate-600 hover:bg-slate-50"
+                            ? "bg-brand-700 text-white"
+                            : "border border-border bg-white text-ink-700 hover:bg-surface-muted"
                         }`}
                       >
                         {page}
@@ -142,7 +142,7 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
               <button
                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="p-1.5 rounded-lg border border-border bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-1.5 rounded-lg border border-border bg-white text-ink-700 hover:bg-surface-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 title="Halaman Selanjutnya"
               >
                 <ChevronRight className="w-4.5 h-4.5" />
@@ -155,7 +155,7 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
       {/* 2. PRINT-ONLY FULL TABLE (Shows all 66 items without pagination) */}
       <div className="hidden print:block">
         <table className="w-full text-xs text-left border-collapse border border-slate-300">
-          <thead className="bg-slate-100 text-slate-700 border-b-2 border-slate-400">
+          <thead className="bg-surface-muted text-ink-700 border-b-2 border-slate-400">
             <tr>
               <th className="px-4 py-2.5 font-bold text-center w-20 border border-slate-300">Peringkat</th>
               <th className="px-4 py-2.5 font-bold border border-slate-300">Nama Kos</th>
@@ -164,22 +164,22 @@ export function HasilAkhirTable({ ranked }: HasilAkhirTableProps) {
               <th className="px-4 py-2.5 font-bold text-right w-28 border border-slate-300">Nilai (V)</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-300">
+          <tbody className="divide-y divide-line">
             {ranked.map((item, index) => (
               <tr key={item.kos.id}>
                 <td className="px-4 py-2 text-center border border-slate-300 font-bold">
                   {index + 1}
                 </td>
-                <td className="px-4 py-2 font-semibold text-slate-900 border border-slate-300">
+                <td className="px-4 py-2 font-semibold text-ink-900 border border-slate-300">
                   {item.kos.name}
                 </td>
-                <td className="px-4 py-2 text-slate-600 border border-slate-300">
+                <td className="px-4 py-2 text-ink-700 border border-slate-300">
                   {item.kos.address}
                 </td>
                 <td className="px-4 py-2 border border-slate-300">
                   {item.kos.genderType === "PUTRA" ? "Putra" : item.kos.genderType === "PUTRI" ? "Putri" : "Campur"}
                 </td>
-                <td className="px-4 py-2 text-right font-bold text-slate-900 border border-slate-300">
+                <td className="px-4 py-2 text-right font-bold text-ink-900 border border-slate-300">
                   {item.score.toFixed(4)}
                 </td>
               </tr>

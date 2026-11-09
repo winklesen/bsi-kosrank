@@ -2,10 +2,19 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MapPin, Menu, X, Search, ChevronDown, User, LayoutDashboard, LogOut, Store, Compass } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MapPin, Menu, X, Search, ChevronDown, User, LayoutDashboard, LogOut } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const CATEGORY_LINKS = [
+  { label: "Semua Kos", href: "/explore" },
+  { label: "Kos Putra", href: "/explore?gender=PUTRA" },
+  { label: "Kos Putri", href: "/explore?gender=PUTRI" },
+  { label: "Kos Campur", href: "/explore?gender=CAMPUR" },
+  { label: "Dekat Amikom", href: "/explore?kampus=Universitas Amikom Yogyakarta" },
+  { label: "Dekat UPN", href: "/explore?kampus=UPN Veteran Yogyakarta" },
+  { label: "Dekat STIMY YKPN", href: "/explore?kampus=STIMY YKPN" },
+];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -17,79 +26,108 @@ export function Navbar() {
 
   return (
     <header className="w-full flex flex-col z-50 sticky top-0">
-      {/* ─── Top Main Navigation Bar ─── */}
-      <div className="bg-[#232F3E] text-white h-[60px] flex items-center justify-between px-4 sm:px-6 lg:px-8 border-b border-[#19222d]">
-        <div className="flex items-center gap-4 md:gap-6 flex-1 max-w-4xl">
+      {/* ─── Top Utility Bar (design.md §5.1) ─── */}
+      <div className="hidden md:flex bg-brand-900 text-white h-7 items-center justify-between px-4 lg:px-8 text-[11px]">
+        <div className="flex items-center gap-1">
+          <Link href="/explore" className="px-2.5 py-0.5 rounded-full bg-white text-brand-700 font-semibold">
+            Ranking SAW
+          </Link>
+          <Link href="/explore?gender=PUTRA" className="px-2.5 py-0.5 rounded-full hover:bg-white/15 transition-colors">
+            Kos Putra
+          </Link>
+          <Link href="/explore?gender=PUTRI" className="px-2.5 py-0.5 rounded-full hover:bg-white/15 transition-colors">
+            Kos Putri
+          </Link>
+        </div>
+        <p className="text-white/90">
+          Rekomendasi kos berbasis metode Simple Additive Weighting —{" "}
+          <Link href="/explore" className="underline font-semibold hover:text-white">
+            Discover now
+          </Link>
+        </p>
+        <div className="flex items-center gap-4 text-white/90">
+          <span>Support 24/7</span>
+          <span className="font-semibold">IDR</span>
+        </div>
+      </div>
+
+      {/* ─── Header Utama (design.md §5.2) ─── */}
+      <div className="bg-brand-700 text-white h-[52px] flex items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-3 md:gap-6 flex-1 min-w-0">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl flex-shrink-0 px-2 py-1 rounded border border-transparent hover:border-white/40">
-            <div className="w-7 h-7 rounded bg-[#FF9900] flex items-center justify-center">
-              <MapPin className="w-4 h-4 text-[#232F3E]" />
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0" aria-label="KosRank - Beranda">
+            <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center">
+              <MapPin className="w-4 h-4 text-brand-700" />
             </div>
-            <span className="font-sans tracking-tight">
-              Kos<span className="text-[#FF9900]">Rank</span>
+            <span className="font-display font-bold text-lg tracking-tight">
+              Kos<span className="text-brand-100">Rank</span>
             </span>
           </Link>
 
-          {/* Delivery Location Indicator */}
-          <div className="hidden lg:flex flex-col text-left leading-tight text-xs pl-2 pr-3 py-1 rounded border border-transparent hover:border-white/40 cursor-pointer">
-            <span className="text-[11px] text-slate-300 font-normal">Kirim ke</span>
-            <div className="flex items-center gap-0.5 font-bold text-[13px] text-white">
-              <MapPin className="w-3.5 h-3.5 text-[#FF9900] flex-shrink-0" />
-              <span>Condong Catur</span>
-            </div>
-          </div>
+          {/* Segmented tabs */}
+          <nav className="hidden lg:flex items-center gap-1 flex-shrink-0">
+            <Link href="/" className="px-3 py-1 rounded-full bg-white text-brand-700 text-[12px] font-semibold">
+              Beranda
+            </Link>
+            <Link href="/explore" className="px-3 py-1 rounded-full hover:bg-white/15 transition-colors text-[12px] font-medium">
+              Eksplor
+            </Link>
+          </nav>
 
-          {/* Amazon-style Search Bar (Desktop) */}
-          <form 
-            action="/explore" 
-            method="GET" 
-            className="hidden md:flex flex-1 h-[40px] bg-white rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-[#FF9900] border-0"
+          {/* Search bar (desktop) — logic: form GET ke /explore */}
+          <form
+            action="/explore"
+            method="GET"
+            className="hidden md:flex flex-1 max-w-xl h-9 bg-white rounded-full items-center overflow-hidden focus-within:ring-2 focus-within:ring-brand-100"
           >
-            <select 
-              name="kampus" 
-              className="bg-[#F3F3F3] text-[12px] text-slate-700 px-3 border-r border-[#D5D9D9] outline-none hover:bg-[#E3E3E3] cursor-pointer rounded-l-md font-sans font-medium h-full"
+            <select
+              name="kampus"
+              aria-label="Pilih kampus"
+              className="bg-white text-[11px] text-ink-700 pl-4 pr-1 outline-none cursor-pointer font-medium h-full flex-shrink-0"
             >
               <option value="">Semua Kampus</option>
               <option value="Universitas Amikom Yogyakarta">Amikom</option>
               <option value="UPN Veteran Yogyakarta">UPN</option>
               <option value="STIMY YKPN">STIMY YKPN</option>
             </select>
-            <input 
-              type="text" 
-              name="lokasi" 
-              placeholder="Cari kos di Condong Catur (contoh: Beji, Depok)..." 
-              className="flex-grow px-3 text-sm text-[#0F1111] bg-white outline-none font-sans"
+            <div className="w-px h-4 bg-line flex-shrink-0" />
+            <input
+              type="text"
+              name="lokasi"
+              placeholder="Cari kos, area, atau kampus..."
+              className="flex-grow px-3 text-[13px] text-ink-900 bg-white outline-none placeholder:text-ink-500 min-w-0"
             />
-            <button 
-              type="submit" 
-              className="bg-[#FEBD69] hover:bg-[#F3A847] px-6 flex items-center justify-center text-[#0F1111] transition-colors cursor-pointer rounded-r-md"
+            <button
+              type="submit"
+              aria-label="Cari kos"
+              className="px-4 h-full flex items-center justify-center text-ink-900 hover:text-brand-600 transition-colors cursor-pointer flex-shrink-0"
             >
-              <Search className="w-5 h-5 text-slate-800" />
+              <Search className="w-4 h-4" />
             </button>
           </form>
         </div>
 
-        {/* Right Nav Options */}
-        <div className="flex items-center gap-3 sm:gap-5 md:gap-6 ml-4">
-          {/* Account Menu */}
+        {/* Right options */}
+        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
           {!session ? (
-            <Link 
-              href="/auth/login" 
-              className="flex flex-col text-left px-3.5 py-1.5 rounded-sm border border-transparent hover:border-white/30 hover:bg-white/5 transition-all"
+            <Link
+              href="/auth/login"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full hover:bg-white/15 transition-colors text-[12px] font-medium"
             >
-              <span className="text-[11px] text-slate-300 font-normal leading-none mb-1">Halo, Masuk</span>
-              <span className="text-[13px] font-bold text-white leading-none">Akun & Daftar</span>
+              <User className="w-4 h-4" />
+              <span className="hidden sm:inline">Masuk / Daftar</span>
             </Link>
           ) : (
             <div className="relative">
               <button
                 onClick={() => setDropOpen(!dropOpen)}
-                className="flex flex-col text-left px-3.5 py-1.5 rounded-sm border border-transparent hover:border-white/30 hover:bg-white/5 transition-all text-white cursor-pointer"
+                aria-label="Menu akun"
+                aria-expanded={dropOpen}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full hover:bg-white/15 transition-colors text-[12px] font-medium cursor-pointer"
               >
-                <span className="text-[11px] text-slate-300 font-normal leading-none mb-1">Halo, {session.user?.name?.split(" ")[0]}</span>
-                <span className="text-[13px] font-bold text-white leading-none flex items-center gap-0.5">
-                  Akun & Daftar <ChevronDown className="w-3.5 h-3.5 text-slate-300" />
-                </span>
+                <User className="w-4 h-4" />
+                <span className="hidden sm:inline">{session.user?.name?.split(" ")[0]}</span>
+                <ChevronDown className="w-3.5 h-3.5" />
               </button>
 
               <AnimatePresence>
@@ -101,41 +139,41 @@ export function Navbar() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 5 }}
                       transition={{ duration: 0.1 }}
-                      className="absolute right-0 top-full mt-1.5 w-52 bg-white rounded-lg border border-[#D5D9D9] shadow-[0_0_6px_rgba(15,17,17,0.15)] py-2.5 z-40 text-[#0F1111]"
+                      className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl border border-line shadow-[0_4px_16px_rgba(15,15,20,0.08)] py-2 z-40 text-ink-900"
                     >
-                      <div className="px-4 py-1.5 border-b border-slate-100 mb-2">
-                        <p className="text-xs font-bold text-[#0F1111] truncate">{session.user?.name}</p>
-                        <p className="text-[10px] text-slate-500 font-semibold uppercase mt-0.5 tracking-wider">
+                      <div className="px-4 py-2 border-b border-line mb-1.5">
+                        <p className="text-[13px] font-semibold truncate">{session.user?.name}</p>
+                        <p className="text-[10px] text-ink-500 font-medium uppercase mt-0.5 tracking-wider">
                           {role === "SUPER_ADMIN" ? "Super Admin" : role === "SELLER" ? "Penjual Kos" : "Pencari Kos"}
                         </p>
                       </div>
-                      
-                      <div className="px-1 space-y-0.5">
-                        <Link 
-                          href={dashboardLink} 
-                          onClick={() => setDropOpen(false)} 
-                          className="flex items-center gap-2 px-3 py-1.5 text-sm font-sans text-[#0F1111] hover:text-[#007185] hover:bg-[#F0F2F2] rounded transition-all"
+
+                      <div className="px-1.5 space-y-0.5">
+                        <Link
+                          href={dashboardLink}
+                          onClick={() => setDropOpen(false)}
+                          className="flex items-center gap-2 px-3 py-2 text-[13px] rounded-lg hover:bg-surface-tint hover:text-brand-700 transition-colors"
                         >
-                          <LayoutDashboard className="w-4 h-4 text-slate-400" /> 
+                          <LayoutDashboard className="w-4 h-4 text-ink-500" />
                           <span>Dashboard</span>
                         </Link>
-                        
-                        <Link 
-                          href="/profile" 
-                          onClick={() => setDropOpen(false)} 
-                          className="flex items-center gap-2 px-3 py-1.5 text-sm font-sans text-[#0F1111] hover:text-[#007185] hover:bg-[#F0F2F2] rounded transition-all"
+
+                        <Link
+                          href="/profile"
+                          onClick={() => setDropOpen(false)}
+                          className="flex items-center gap-2 px-3 py-2 text-[13px] rounded-lg hover:bg-surface-tint hover:text-brand-700 transition-colors"
                         >
-                          <User className="w-4 h-4 text-slate-400" /> 
+                          <User className="w-4 h-4 text-ink-500" />
                           <span>Profil Saya</span>
                         </Link>
-                        
-                        <div className="h-px bg-slate-100 my-1.5" />
-                        
-                        <button 
-                          onClick={() => { setDropOpen(false); signOut({ callbackUrl: "/" }); }} 
-                          className="w-full flex items-center gap-2 px-3 py-1.5 text-sm font-sans text-[#B12704] hover:bg-red-50 rounded transition-all text-left"
+
+                        <div className="h-px bg-line my-1.5" />
+
+                        <button
+                          onClick={() => { setDropOpen(false); signOut({ callbackUrl: "/" }); }}
+                          className="w-full flex items-center gap-2 px-3 py-2 text-[13px] text-red-600 hover:bg-red-50 rounded-lg transition-colors text-left cursor-pointer"
                         >
-                          <LogOut className="w-4 h-4 text-[#B12704]" /> 
+                          <LogOut className="w-4 h-4" />
                           <span>Keluar</span>
                         </button>
                       </div>
@@ -146,107 +184,88 @@ export function Navbar() {
             </div>
           )}
 
-          {/* Pasang Kos */}
-          <Link 
-            href={session ? dashboardLink : "/auth/register?role=seller"} 
-            className="hidden sm:flex flex-col text-left px-3.5 py-1.5 rounded-sm border border-transparent hover:border-white/30 hover:bg-white/5 transition-all text-white"
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Tutup menu" : "Buka menu"}
+            className="md:hidden p-1.5 rounded-full hover:bg-white/15 text-white flex items-center justify-center cursor-pointer"
           >
-            <span className="text-[11px] text-slate-300 font-normal leading-none mb-1">Pemilik Kos</span>
-            <span className="text-[13px] font-bold text-white leading-none">Pasang Kos</span>
-          </Link>
-
-          {/* Mobile Menu Toggle */}
-          <button 
-            onClick={() => setOpen(!open)} 
-            className="md:hidden p-1.5 rounded hover:bg-[#37475A] text-white flex items-center justify-center"
-          >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* ─── Bottom Sub-Navigation (Department Bar) ─── */}
-      <nav className="bg-[#37475A] text-white text-[14px] font-medium h-[39px] flex items-center px-4 sm:px-6 lg:px-8 overflow-x-auto gap-4 scrollbar-none border-b border-[#232F3E]/20">
-        <Link href="/explore" className="hover:outline hover:outline-1 hover:outline-white/60 px-2.5 py-1 rounded flex items-center gap-1.5 flex-shrink-0 font-bold text-[13px]">
-          <Menu className="w-4 h-4" /> Semua Kos
-        </Link>
-        <Link href="/explore?gender=PUTRA" className="hover:outline hover:outline-1 hover:outline-white/60 px-2.5 py-1 rounded flex-shrink-0 text-[13px]">
-          Kos Putra
-        </Link>
-        <Link href="/explore?gender=PUTRI" className="hover:outline hover:outline-1 hover:outline-white/60 px-2.5 py-1 rounded flex-shrink-0 text-[13px]">
-          Kos Putri
-        </Link>
-        <Link href="/explore?gender=CAMPUR" className="hover:outline hover:outline-1 hover:outline-white/60 px-2.5 py-1 rounded flex-shrink-0 text-[13px]">
-          Kos Campur
-        </Link>
-        <div className="h-4 w-px bg-slate-500/50 flex-shrink-0" />
-        <Link href="/explore?kampus=Universitas Amikom Yogyakarta" className="hover:outline hover:outline-1 hover:outline-white/60 px-2.5 py-1 rounded flex-shrink-0 text-[13px]">
-          Dekat Amikom
-        </Link>
-        <Link href="/explore?kampus=UPN Veteran Yogyakarta" className="hover:outline hover:outline-1 hover:outline-white/60 px-2.5 py-1 rounded flex-shrink-0 text-[13px]">
-          Dekat UPN
-        </Link>
-        <Link href="/explore?kampus=STIMY YKPN" className="hover:outline hover:outline-1 hover:outline-white/60 px-2.5 py-1 rounded flex-shrink-0 text-[13px]">
-          Dekat STIMY YKPN
-        </Link>
+      {/* ─── Category Nav (design.md §5.3) ─── */}
+      <nav className="hidden md:flex bg-white border-b border-line text-[12px] font-medium text-ink-700 h-9 items-center px-4 lg:px-8 gap-1 overflow-x-auto">
+        {CATEGORY_LINKS.map((link) => (
+          <Link
+            key={link.label}
+            href={link.href}
+            className="px-3 py-1.5 rounded-lg hover:bg-brand-100 hover:text-brand-700 transition-colors whitespace-nowrap flex-shrink-0"
+          >
+            {link.label}
+          </Link>
+        ))}
       </nav>
 
-      {/* ─── Mobile Search Bar (Only shown on small screens) ─── */}
-      <div className="md:hidden bg-[#232F3E] px-4 py-2 border-t border-[#37475A]">
-        <form action="/explore" method="GET" className="flex h-[36px] bg-white rounded overflow-hidden">
-          <input 
-            type="text" 
-            name="lokasi" 
-            placeholder="Cari kos di Condong Catur..." 
-            className="flex-grow px-3 text-xs text-[#0F1111] bg-white outline-none font-sans"
+      {/* ─── Mobile search ─── */}
+      <div className="md:hidden bg-brand-700 px-4 py-2">
+        <form action="/explore" method="GET" className="flex h-9 bg-white rounded-full items-center overflow-hidden">
+          <input
+            type="text"
+            name="lokasi"
+            placeholder="Cari kos, area, atau kampus..."
+            className="flex-grow px-4 text-xs text-ink-900 bg-white outline-none placeholder:text-ink-500 min-w-0"
           />
-          <button 
-            type="submit" 
-            className="bg-[#FEBD69] hover:bg-[#F3A847] px-4 flex items-center justify-center text-[#0F1111]"
-          >
-            <Search className="w-4 h-4 text-slate-800" />
+          <button type="submit" aria-label="Cari kos" className="px-4 flex items-center justify-center text-ink-900">
+            <Search className="w-4 h-4" />
           </button>
         </form>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile menu dropdown */}
       {open && (
-        <div className="md:hidden border-t border-[#37475A] bg-[#232F3E] text-white px-4 py-4 flex flex-col gap-2.5">
-          <Link href="/explore" className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded" onClick={() => setOpen(false)}>
-            Eksplor Kos
-          </Link>
-          <Link href="/explore?gender=PUTRA" className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded" onClick={() => setOpen(false)}>
-            Kos Putra
-          </Link>
-          <Link href="/explore?gender=PUTRI" className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded" onClick={() => setOpen(false)}>
-            Kos Putri
-          </Link>
-          <Link href="/explore?gender=CAMPUR" className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded" onClick={() => setOpen(false)}>
-            Kos Campur
-          </Link>
-          
-          <div className="h-px bg-slate-700/50 my-1" />
+        <div className="md:hidden border-t border-line bg-white text-ink-900 px-4 py-3 flex flex-col gap-1 shadow-[0_4px_16px_rgba(15,15,20,0.08)]">
+          {CATEGORY_LINKS.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-[13px] font-medium py-2 px-3 hover:bg-surface-tint hover:text-brand-700 rounded-lg"
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          <div className="h-px bg-line my-1.5" />
 
           {!session ? (
-            <>
-              <Link href="/auth/register?role=seller" className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded text-[#FF9900]" onClick={() => setOpen(false)}>
-                Pasang Kos
-              </Link>
-              <Link href="/auth/login" className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded" onClick={() => setOpen(false)}>
-                Masuk
-              </Link>
-            </>
+            <Link
+              href="/auth/login"
+              className="text-[13px] font-semibold py-2 px-3 hover:bg-surface-tint hover:text-brand-700 rounded-lg text-brand-700"
+              onClick={() => setOpen(false)}
+            >
+              Masuk / Daftar
+            </Link>
           ) : (
             <>
-              <Link href={dashboardLink} className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded" onClick={() => setOpen(false)}>
+              <Link
+                href={dashboardLink}
+                className="text-[13px] font-medium py-2 px-3 hover:bg-surface-tint hover:text-brand-700 rounded-lg"
+                onClick={() => setOpen(false)}
+              >
                 Dashboard
               </Link>
-              <Link href="/profile" className="text-sm font-semibold py-1.5 px-2 hover:bg-[#37475A] rounded" onClick={() => setOpen(false)}>
+              <Link
+                href="/profile"
+                className="text-[13px] font-medium py-2 px-3 hover:bg-surface-tint hover:text-brand-700 rounded-lg"
+                onClick={() => setOpen(false)}
+              >
                 Profil Saya
               </Link>
-              <button 
-                onClick={() => { setOpen(false); signOut({ callbackUrl: "/" }); }} 
-                className="text-left text-sm font-semibold py-1.5 px-2 text-[#B12704] hover:bg-[#37475A] rounded"
+              <button
+                onClick={() => { setOpen(false); signOut({ callbackUrl: "/" }); }}
+                className="text-left text-[13px] font-medium py-2 px-3 text-red-600 hover:bg-red-50 rounded-lg cursor-pointer"
               >
                 Keluar
               </button>

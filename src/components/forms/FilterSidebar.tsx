@@ -76,24 +76,23 @@ export function FilterSidebar({ currentParams }: FilterSidebarProps) {
     });
   };
 
+  const inputClass =
+    "w-full text-[13px] h-9 px-3 rounded-lg border border-line bg-white outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 text-ink-900 transition-colors";
+
   return (
-    <div className="bg-white rounded-lg border border-[#D5D9D9] p-4 sticky top-24 text-left font-sans shadow-sm w-full">
+    <div className="bg-white rounded-2xl border border-line p-5 sticky top-28 text-left w-full">
       {/* Title Header */}
-      <div className="flex items-center gap-1.5 mb-4 border-b border-[#F0F2F2] pb-3">
-        <SlidersHorizontal className="w-4 h-4 text-[#007185]" />
-        <span className="font-bold text-[14px] text-[#0F1111]">Filter Kos</span>
+      <div className="flex items-center gap-2 mb-4 border-b border-line pb-3">
+        <SlidersHorizontal className="w-4 h-4 text-brand-700" />
+        <span className="font-display font-semibold text-[14px] text-ink-900">Filter Kos</span>
       </div>
 
       {/* Lokasi */}
       <div className="mb-4">
-        <label className="text-[12px] font-bold text-[#565959] uppercase tracking-wider mb-1.5 block">
+        <label className="text-[11px] font-semibold text-ink-500 uppercase tracking-wider mb-1.5 block">
           Kecamatan / Lokasi
         </label>
-        <select
-          value={lokasi}
-          onChange={(e) => setLokasi(e.target.value)}
-          className="w-full text-[13px] h-[34px] px-2.5 rounded border border-[#D5D9D9] bg-white outline-none focus:border-[#007185] focus:ring-1 focus:ring-[#007185] text-[#0F1111]"
-        >
+        <select value={lokasi} onChange={(e) => setLokasi(e.target.value)} className={inputClass}>
           <option value="">Semua Kecamatan</option>
           {LOCATION_OPTIONS.map((loc) => (
             <option key={loc} value={loc}>
@@ -103,18 +102,18 @@ export function FilterSidebar({ currentParams }: FilterSidebarProps) {
         </select>
       </div>
 
-      {/* Gender (Styled as custom chips) */}
+      {/* Gender chips */}
       <div className="mb-4">
-        <label className="text-[12px] font-bold text-[#565959] uppercase tracking-wider mb-1.5 block">
+        <label className="text-[11px] font-semibold text-ink-500 uppercase tracking-wider mb-1.5 block">
           Tipe Kos
         </label>
         <div className="flex gap-1.5 flex-wrap">
           <button
             onClick={() => setGender("")}
-            className={`text-[13px] px-3 py-1 rounded cursor-pointer transition-colors ${
+            className={`text-[13px] px-3 py-1.5 rounded-lg border cursor-pointer transition-colors ${
               !gender
-                ? "border border-[#007185] bg-[#F3FCFF] text-[#007185] font-semibold"
-                : "border border-[#D5D9D9] bg-white text-[#0F1111] hover:bg-[#F7FAFA] font-normal"
+                ? "border-brand-600 bg-brand-100 text-brand-700 font-semibold"
+                : "border-line bg-white text-ink-900 hover:bg-surface-muted font-normal"
             }`}
           >
             Semua
@@ -123,10 +122,10 @@ export function FilterSidebar({ currentParams }: FilterSidebarProps) {
             <button
               key={g.value}
               onClick={() => setGender(g.value)}
-              className={`text-[13px] px-3 py-1 rounded cursor-pointer transition-colors ${
+              className={`text-[13px] px-3 py-1.5 rounded-lg border cursor-pointer transition-colors ${
                 gender === g.value
-                  ? "border border-[#007185] bg-[#F3FCFF] text-[#007185] font-semibold"
-                  : "border border-[#D5D9D9] bg-white text-[#0F1111] hover:bg-[#F7FAFA] font-normal"
+                  ? "border-brand-600 bg-brand-100 text-brand-700 font-semibold"
+                  : "border-line bg-white text-ink-900 hover:bg-surface-muted font-normal"
               }`}
             >
               {g.label}
@@ -135,51 +134,51 @@ export function FilterSidebar({ currentParams }: FilterSidebarProps) {
         </div>
       </div>
 
-      {/* Harga Range */}
+      {/* Harga range */}
       <div className="mb-5">
-        <label className="text-[12px] font-bold text-[#565959] uppercase tracking-wider mb-1.5 block">
+        <label className="text-[11px] font-semibold text-ink-500 uppercase tracking-wider mb-1.5 block">
           Range Harga (Rp/Bulan)
         </label>
         <div className="flex gap-2 items-center">
           <div className="relative flex-1">
-            <span className="absolute left-2.5 top-1.5 text-xs text-slate-400">Rp</span>
+            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[11px] text-ink-500">Rp</span>
             <input
               type="number"
               placeholder="Min"
               value={minHarga}
               onChange={(e) => setMinHarga(e.target.value)}
-              className="w-full text-[13px] h-[34px] pl-7 pr-2 rounded border border-[#D5D9D9] bg-white outline-none focus:border-[#007185] focus:ring-1 focus:ring-[#007185] text-[#0F1111]"
+              className={`${inputClass} pl-7`}
             />
           </div>
-          <span className="text-slate-400 text-xs">–</span>
+          <span className="text-ink-500 text-xs">–</span>
           <div className="relative flex-1">
-            <span className="absolute left-2.5 top-1.5 text-xs text-slate-400">Rp</span>
+            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[11px] text-ink-500">Rp</span>
             <input
               type="number"
               placeholder="Max"
               value={maxHarga}
               onChange={(e) => setMaxHarga(e.target.value)}
-              className="w-full text-[13px] h-[34px] pl-7 pr-2 rounded border border-[#D5D9D9] bg-white outline-none focus:border-[#007185] focus:ring-1 focus:ring-[#007185] text-[#0F1111]"
+              className={`${inputClass} pl-7`}
             />
           </div>
         </div>
       </div>
 
-      {/* Action Buttons */}
+      {/* Action buttons */}
       <div className="flex flex-col gap-2 pt-1">
-        <button 
-          onClick={applyFilter} 
-          disabled={isPending} 
-          className="bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] border border-[#F7CA00] rounded text-[13px] font-semibold h-[36px] shadow-sm w-full cursor-pointer flex items-center justify-center transition-colors disabled:opacity-50"
+        <button
+          onClick={applyFilter}
+          disabled={isPending}
+          className="bg-brand-700 hover:bg-brand-600 text-white rounded-lg text-[13px] font-semibold h-9 w-full cursor-pointer flex items-center justify-center transition-all hover:-translate-y-px disabled:opacity-50 disabled:hover:translate-y-0"
         >
           {isPending ? "Memuat..." : "Terapkan Filter"}
         </button>
-        <button 
-          onClick={resetFilter} 
-          disabled={isPending} 
-          className="bg-white hover:bg-[#F7FAFA] border border-[#D5D9D9] text-[#0F1111] rounded text-[13px] font-normal h-[36px] shadow-sm w-full cursor-pointer flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
+        <button
+          onClick={resetFilter}
+          disabled={isPending}
+          className="bg-white hover:border-brand-600 hover:text-brand-600 border border-line text-ink-900 rounded-lg text-[13px] font-medium h-9 w-full cursor-pointer flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
         >
-          <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
+          <RotateCcw className="w-3.5 h-3.5 text-ink-500" />
           <span>Reset</span>
         </button>
       </div>

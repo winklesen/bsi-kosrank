@@ -2,8 +2,22 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, MapPin, Search, Shield, Zap, Compass, Crosshair, HelpCircle, CheckCircle, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  ArrowRight,
+  MapPin,
+  Shield,
+  Zap,
+  Compass,
+  Crosshair,
+  HelpCircle,
+  X,
+  BedDouble,
+  Users,
+  Building2,
+  GraduationCap,
+  Wallet,
+  CheckCircle,
+} from "lucide-react";
 import { KosCard } from "@/components/cards/KosCard";
 
 interface KosItem {
@@ -30,6 +44,23 @@ interface LandingPageInteractiveProps {
 
 const PRESET_LOCATIONS = [
   { name: "UBSI Margonda", lat: -6.3685, lng: 106.8335 },
+];
+
+// Bento kategori (design.md §5.7) — link ke filter /explore yang sudah ada
+const CATEGORY_TILES = [
+  { label: "Kos Putra", desc: "Kos khusus putra di sekitar kampus.", grad: "bg-grad-bags", href: "/explore?gender=PUTRA", icon: BedDouble },
+  { label: "Kos Putri", desc: "Kos khusus putri, aman dan nyaman.", grad: "bg-grad-headwear", href: "/explore?gender=PUTRI", icon: Users },
+  { label: "Kos Campur", desc: "Pilihan kos campur untuk semua mahasiswa.", grad: "bg-grad-tech", href: "/explore?gender=CAMPUR", icon: Building2 },
+  { label: "Dekat Amikom", desc: "Jarak tempuh singkat ke kampus Amikom.", grad: "bg-grad-apparel", href: "/explore?kampus=Universitas Amikom Yogyakarta", icon: GraduationCap },
+  { label: "Dekat UPN", desc: "Alternatif kos strategis dekat UPN.", grad: "bg-grad-office", href: "/explore?kampus=UPN Veteran Yogyakarta", icon: GraduationCap },
+  { label: "Dekat STIMY YKPN", desc: "Kos terjangkau dekat STIMY YKPN.", grad: "bg-grad-eco", href: "/explore?kampus=STIMY YKPN", icon: Wallet },
+];
+
+const USP_ITEMS = [
+  { icon: Zap, title: "Ranking SAW Otomatis", desc: "Skor objektif dari 6 kriteria berbobot, diperbarui real-time." },
+  { icon: Crosshair, title: "Jarak GPS Real-time", desc: "Rekomendasi dihitung dari titik lokasi Anda saat ini." },
+  { icon: Shield, title: "Transparan & Objektif", desc: "Rincian bobot dan normalisasi terbuka untuk dipelajari." },
+  { icon: CheckCircle, title: "Data Terkurasi", desc: "Listing kos aktif yang tervalidasi oleh admin." },
 ];
 
 export default function LandingPageInteractive({ initialKos, totalKos }: LandingPageInteractiveProps) {
@@ -151,115 +182,183 @@ export default function LandingPageInteractive({ initialKos, totalKos }: Landing
   };
 
   return (
-    <div className="flex flex-col font-sans text-[#0F1111] bg-white">
-      {/* ─── Hero Section (High-Density, Utilitarian Surface Background) ─── */}
-      <section className="bg-[#F0F2F2] border-b border-[#D5D9D9] py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row items-start justify-between gap-6">
-          
-          {/* Hero text & headline */}
-          <div className="flex-1 text-left space-y-3">
-            <div 
-              onClick={() => setShowInfoModal(true)}
-              className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#007185] hover:text-[#004B57] hover:underline cursor-pointer bg-white px-2.5 py-1 rounded border border-[#D5D9D9] shadow-sm"
-            >
-              <Zap className="w-3.5 h-3.5 text-[#FF9900] fill-[#FF9900]" />
-              <span>Sistem Pendukung Keputusan SAW (Bobot Kriteria)</span>
-              <HelpCircle className="w-3.5 h-3.5 text-slate-400" />
-            </div>
-
-            {/* Page Title: Source Sans 3 28px/36px, weight 700 */}
-            <h1 className="text-[28px] leading-[36px] font-bold text-[#0F1111] tracking-tight">
-              Temukan Kos Terbaik di Dekat <span className="text-[#007185] underline">{locationName}</span>
-            </h1>
-
-            {/* Body Small: Source Sans 3 13px/18px */}
-            <p className="text-[13px] leading-[18px] text-[#565959] max-w-xl">
-              Sistem rekomendasi KosRank membandingkan alternatif kos secara real-time berdasarkan kriteria harga, fasilitas, ukuran kamar, dan jarak kampus menggunakan metode Simple Additive Weighting (SAW).
-            </p>
-          </div>
-
-          {/* Location Interactive Selector (styled as Amazon filter chips) */}
-          <div className="w-full md:w-auto bg-white border border-[#D5D9D9] p-4 rounded-lg shadow-sm flex flex-col gap-2.5 flex-shrink-0 md:min-w-[340px]">
-            <span className="text-[12px] font-bold text-[#565959] uppercase tracking-wider block">
-              Pilih Titik Acuan Rekomendasi:
-            </span>
-            
-            <div className="flex flex-col gap-2">
-              {/* Preset Chip */}
+    <div className="flex flex-col font-sans text-ink-900 bg-white">
+      {/* ─── Hero Banner (design.md §5.4) ─── */}
+      <section className="px-3 sm:px-4 pt-3 sm:pt-4">
+        <div className="max-w-[1200px] mx-auto rounded-[24px] bg-grad-hero overflow-hidden relative">
+          <div className="max-w-[1200px] mx-auto px-6 sm:px-10 py-12 md:py-16 grid md:grid-cols-[1fr_360px] items-center gap-8">
+            {/* Left: headline */}
+            <div className="space-y-4 text-left">
               <button
-                onClick={() => handleSelectPreset({ name: "UBSI Margonda", lat: -6.3685, lng: 106.8335 })}
-                className={`w-full flex items-center justify-between text-left p-2.5 rounded border text-[13px] transition-all cursor-pointer ${
-                  !gpsActive
-                    ? "border-[#007185] bg-[#F3FCFF] text-[#007185] font-semibold"
-                    : "border-[#D5D9D9] bg-white text-[#0F1111] hover:bg-[#F7FAFA]"
-                }`}
+                onClick={() => setShowInfoModal(true)}
+                className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-brand-700 bg-white/80 hover:bg-white transition-colors px-3 py-1.5 rounded-full cursor-pointer"
               >
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#FF9900]" />
-                  <span>UBSI Margonda (Default)</span>
-                </div>
-                {!gpsActive && <span className="text-[10px] text-[#007185] font-bold">Aktif</span>}
+                <Zap className="w-3.5 h-3.5 fill-brand-700 text-brand-700" />
+                <span>Sistem Pendukung Keputusan SAW</span>
+                <HelpCircle className="w-3.5 h-3.5 text-ink-500" />
               </button>
 
-              {/* GPS Chip */}
-              <button
-                onClick={handleUseGPS}
-                className={`w-full flex items-center justify-between text-left p-2.5 rounded border text-[13px] transition-all cursor-pointer ${
-                  gpsActive
-                    ? "border-[#007185] bg-[#F3FCFF] text-[#007185] font-semibold"
-                    : "border-[#D5D9D9] bg-white text-[#0F1111] hover:bg-[#F7FAFA]"
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <Compass className={`w-4 h-4 text-[#FF9900] ${isLoading && gpsActive ? "animate-spin" : ""}`} />
-                  <span>Gunakan Lokasi GPS Saya</span>
-                </div>
-                {gpsActive && <span className="text-[10px] text-[#007185] font-bold">Aktif</span>}
-              </button>
+              <h1 className="font-display text-[36px] md:text-[44px] leading-[1.1] font-bold tracking-[-0.02em] text-ink-900 max-w-xl">
+                Temukan kos terbaik di dekat{" "}
+                <span className="underline decoration-brand-700/50 decoration-4 underline-offset-4">{locationName}</span>
+              </h1>
+
+              <p className="text-[14px] leading-relaxed text-ink-700 max-w-lg">
+                KosRank membandingkan alternatif kos secara real-time berdasarkan harga, jarak, ukuran kamar, dan fasilitas menggunakan metode Simple Additive Weighting.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <Link
+                  href="#recommendations"
+                  className="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-600 text-white h-10 px-5 rounded-lg text-[13px] font-semibold transition-all hover:-translate-y-px cursor-pointer"
+                >
+                  Lihat Rekomendasi <ArrowRight className="w-4 h-4" />
+                </Link>
+                <button
+                  onClick={() => setShowInfoModal(true)}
+                  className="inline-flex items-center gap-2 bg-white/70 hover:bg-white text-ink-900 h-10 px-5 rounded-lg text-[13px] font-semibold transition-colors cursor-pointer"
+                >
+                  Metode SAW
+                </button>
+              </div>
+            </div>
+
+            {/* Right: location selector card */}
+            <div className="bg-white rounded-2xl border border-line shadow-[0_4px_16px_rgba(15,15,20,0.06)] p-5 flex flex-col gap-3">
+              <span className="text-[11px] font-semibold text-ink-500 uppercase tracking-wider">
+                Titik Acuan Rekomendasi
+              </span>
+
+              <div className="flex flex-col gap-2">
+                {/* Preset */}
+                <button
+                  onClick={() => handleSelectPreset({ name: "UBSI Margonda", lat: -6.3685, lng: 106.8335 })}
+                  className={`w-full flex items-center justify-between text-left p-3 rounded-xl border text-[13px] transition-all cursor-pointer ${
+                    !gpsActive
+                      ? "border-brand-600 bg-brand-100 text-brand-700 font-semibold"
+                      : "border-line bg-white text-ink-900 hover:bg-surface-muted"
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    <span>UBSI Margonda (Default)</span>
+                  </span>
+                  {!gpsActive && <span className="text-[10px] font-bold">Aktif</span>}
+                </button>
+
+                {/* GPS */}
+                <button
+                  onClick={handleUseGPS}
+                  className={`w-full flex items-center justify-between text-left p-3 rounded-xl border text-[13px] transition-all cursor-pointer ${
+                    gpsActive
+                      ? "border-brand-600 bg-brand-100 text-brand-700 font-semibold"
+                      : "border-line bg-white text-ink-900 hover:bg-surface-muted"
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <Compass className={`w-4 h-4 ${isLoading && gpsActive ? "animate-spin" : ""}`} />
+                    <span>Gunakan Lokasi GPS Saya</span>
+                  </span>
+                  {gpsActive && <span className="text-[10px] font-bold">Aktif</span>}
+                </button>
+              </div>
             </div>
           </div>
 
+          {/* Carousel dots (dekoratif) */}
+          <div className="flex items-center justify-center gap-1.5 pb-4" aria-hidden="true">
+            <span className="w-1.5 h-1.5 rounded-full bg-ink-900" />
+            <span className="w-1.5 h-1.5 rounded-full bg-ink-900/30" />
+            <span className="w-1.5 h-1.5 rounded-full bg-ink-900/30" />
+          </div>
         </div>
       </section>
 
-      {/* ─── Top Recommendations Section (Utilitarian Grid) ─── */}
-      <section id="recommendations" className="py-8 px-4 sm:px-6 lg:px-8 max-w-[1500px] mx-auto w-full">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-4 border-b border-[#D5D9D9] pb-4">
-          <div>
-            <div className="flex items-center gap-1.5 text-[12px] font-bold text-[#CC5500] uppercase tracking-wider">
-              <Zap className="w-4 h-4 fill-[#FF9900] text-[#FF9900]" />
-              Rekomendasi Teratas
+      {/* ─── USP Cards (design.md §5.5) ─── */}
+      <section className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {USP_ITEMS.map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="bg-surface-tint border border-line rounded-xl p-4 text-left">
+              <Icon className="w-6 h-6 stroke-[1.5] text-ink-900 mb-2.5" />
+              <h3 className="font-display font-semibold text-[14px] mb-0.5">{title}</h3>
+              <p className="text-[11px] text-ink-500 leading-relaxed">{desc}</p>
             </div>
-            {/* Section Title: Source Sans 3 21px/28px, weight 700 */}
-            <h2 className="text-[21px] leading-[28px] font-bold text-[#0F1111] tracking-tight mt-1">
-              Hasil Rekomendasi SAW di {locationName}
+          ))}
+        </div>
+      </section>
+
+      {/* ─── Bento Kategori (design.md §5.6 + §5.7) ─── */}
+      <section className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-6 gap-4">
+          <div>
+            <h2 className="font-display text-[26px] md:text-[30px] font-bold tracking-[-0.02em] leading-[1.2]">
+              Pilihan kos sesuai kebutuhanmu
             </h2>
-            <p className="text-[13px] text-[#565959] mt-0.5">
-              Diurutkan secara objektif berdasarkan skor kecocokan tertinggi.
-            </p>
+            <p className="text-[12px] text-ink-500 mt-1">Filter cepat berdasarkan gender dan kampus tujuan.</p>
           </div>
-          
-          <Link href="/explore">
-            {/* Outlined Amazon Button */}
-            <button className="bg-white hover:bg-[#F7FAFA] border border-[#D5D9D9] text-[#0F1111] rounded text-[13px] h-9 px-4 shadow-sm inline-flex items-center gap-1 cursor-pointer font-sans">
-              Lihat Semua Kos ({totalKos}) <ArrowRight className="w-4 h-4 text-[#565959]" />
-            </button>
+          <Link
+            href="/explore"
+            className="hidden sm:inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-600 text-white h-9 px-4 rounded-lg text-[13px] font-semibold transition-all hover:-translate-y-px flex-shrink-0"
+          >
+            Lihat Semua <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        {/* Loading States & Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {CATEGORY_TILES.map(({ label, desc, grad, href, icon: Icon }) => (
+            <Link
+              key={label}
+              href={href}
+              className={`group relative ${grad} rounded-2xl p-5 h-44 overflow-hidden text-white block`}
+            >
+              {/* Overlay keterbacaan (design.md §10) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" aria-hidden="true" />
+              <div className="relative h-full flex flex-col justify-between">
+                <div>
+                  <h3 className="font-display font-semibold text-[18px]">{label}</h3>
+                  <p className="text-[11px] text-white/85 max-w-[75%] mt-1 leading-relaxed">{desc}</p>
+                </div>
+                <Icon
+                  className="w-16 h-16 self-end text-white/40 group-hover:scale-110 transition-transform duration-300"
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── Rekomendasi Teratas ─── */}
+      <section id="recommendations" className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 scroll-mt-32">
+        <div className="flex items-end justify-between mb-6 gap-4">
+          <div>
+            <h2 className="font-display text-[26px] md:text-[30px] font-bold tracking-[-0.02em] leading-[1.2]">
+              Rekomendasi teratas di {locationName}
+            </h2>
+            <p className="text-[12px] text-ink-500 mt-1">
+              Diurutkan objektif berdasarkan skor kecocokan SAW tertinggi.
+            </p>
+          </div>
+          <Link
+            href="/explore"
+            className="hidden sm:inline-flex items-center gap-2 border border-line hover:border-brand-600 hover:text-brand-600 text-ink-900 bg-white h-9 px-4 rounded-lg text-[13px] font-semibold transition-colors flex-shrink-0"
+          >
+            Lihat Semua Kos ({totalKos}) <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white rounded-lg border border-[#D5D9D9] p-4 animate-pulse h-[360px]" />
+              <div key={i} className="bg-surface-muted rounded-xl animate-pulse h-[360px]" />
             ))}
           </div>
         ) : recommendations.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {recommendations.slice(0, 3).map((item, idx) => (
-              <KosCard 
-                key={item.id} 
+              <KosCard
+                key={item.id}
                 kos={{
                   id: item.id,
                   name: item.name,
@@ -280,53 +379,140 @@ export default function LandingPageInteractive({ initialKos, totalKos }: Landing
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-[#F0F2F2] rounded-lg border border-[#D5D9D9] text-slate-500">
-            <MapPin className="w-12 h-12 mx-auto mb-3 opacity-30 text-slate-400" />
-            <p className="font-bold text-[14px]">Belum ada kos terdaftar di dekat lokasi ini.</p>
-            <p className="text-xs text-[#565959] mt-1">Coba gunakan preset lokasi lain atau hubungi admin.</p>
+          <div className="text-center py-16 bg-surface-tint rounded-2xl border border-line text-ink-500">
+            <MapPin className="w-12 h-12 mx-auto mb-3 opacity-30" />
+            <p className="font-display font-semibold text-[14px] text-ink-900">Belum ada kos terdaftar di dekat lokasi ini.</p>
+            <p className="text-xs mt-1">Coba gunakan titik acuan lain atau hubungi admin.</p>
           </div>
         )}
       </section>
 
-      {/* ─── Informative Features Section ─── */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-[1500px] mx-auto w-full border-t border-[#D5D9D9] mt-4 mb-8">
-        <div className="text-left mb-6">
-          <h2 className="text-[21px] font-bold text-[#0F1111]">Metodologi Pendukung Keputusan</h2>
-          <p className="text-[13px] text-[#565959] mt-0.5">Bagaimana KosRank menghitung rekomendasi tempat tinggal Anda secara adil</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { icon: Crosshair, title: "Jarak GPS Real-time", desc: "Sistem mengukur koordinat lintang/bujur Anda ke kos secara presisi (Cost)." },
-            { icon: Zap, title: "Simple Additive Weighting", desc: "Membagi bobot kriteria benefit dan cost untuk mendapatkan nilai alternatif total." },
-            { icon: Shield, title: "Skor Objektif Transparan", desc: "Rekomendasi murni berdasarkan kecocokan data fasilitas dan harga, bebas sponsor bias." },
-          ].map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="p-4 rounded-lg border border-[#D5D9D9] bg-white hover:shadow-sm transition-all text-left">
-              <div className="w-10 h-10 bg-[#F0F2F2] rounded flex items-center justify-center mb-3">
-                <Icon className="w-5 h-5 text-[#007185]" />
-              </div>
-              <h3 className="font-bold text-[14px] text-[#0F1111] mb-1">{title}</h3>
-              <p className="text-[13px] text-[#565959] leading-relaxed">{desc}</p>
-            </div>
-          ))}
+      {/* ─── Promo Cards (design.md §5.9) ─── */}
+      <section className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-grad-express rounded-2xl p-6 text-white flex flex-col min-h-[220px]">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-white/90">SAW Real-time</span>
+            <h3 className="font-display font-bold text-[20px] mt-1">Rekomendasi instan</h3>
+            <p className="text-[12px] text-white/90 leading-relaxed mt-1.5">
+              Aktifkan GPS dan dapatkan ranking kos terbaik dari titik lokasi Anda saat ini.
+            </p>
+            <Link
+              href="#recommendations"
+              className="mt-auto inline-flex items-center gap-2 border border-white/70 hover:bg-white/15 text-white h-9 px-4 rounded-lg text-[13px] font-semibold transition-colors self-start"
+            >
+              Coba Sekarang <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="bg-grad-premium rounded-2xl p-6 text-white flex flex-col min-h-[220px]">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-white/90">Transparan</span>
+            <h3 className="font-display font-bold text-[20px] mt-1">Perhitungan terbuka</h3>
+            <p className="text-[12px] text-white/90 leading-relaxed mt-1.5">
+              Lihat bobot tiap kriteria dan cara skor dihitung — tanpa sponsor bias.
+            </p>
+            <button
+              onClick={() => setShowInfoModal(true)}
+              className="mt-auto inline-flex items-center gap-2 border border-white/70 hover:bg-white/15 text-white h-9 px-4 rounded-lg text-[13px] font-semibold transition-colors self-start cursor-pointer"
+            >
+              Lihat Metodologi <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="bg-grad-eco rounded-2xl p-6 text-white flex flex-col min-h-[220px]">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-white/90">Objektif</span>
+            <h3 className="font-display font-bold text-[20px] mt-1">100% berbasis data</h3>
+            <p className="text-[12px] text-white/90 leading-relaxed mt-1.5">
+              Peringkat murni dari data harga, jarak, dan fasilitas yang tervalidasi.
+            </p>
+            <Link
+              href="/explore"
+              className="mt-auto inline-flex items-center gap-2 border border-white/70 hover:bg-white/15 text-white h-9 px-4 rounded-lg text-[13px] font-semibold transition-colors self-start"
+            >
+              Eksplor Kos <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ─── SAW Criteria Info Modal (Level 2 Elevation Shadow) ─── */}
+      {/* ─── Editorial + Metodologi (design.md §5.8) ─── */}
+      <section className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="text-left">
+            <h2 className="font-display text-[26px] md:text-[30px] font-bold tracking-[-0.02em] leading-[1.2]">
+              Metodologi yang bisa dipertanggungjawabkan
+            </h2>
+            <p className="text-[13px] text-ink-700 leading-relaxed mt-3 max-w-md">
+              Di balik setiap ranking, ada matriks keputusan yang dinormalisasi lalu dibobot sesuai kriteria resmi —
+              sama seperti metode SAW pada penelitian SPK pemilihan kos.
+            </p>
+            <button
+              onClick={() => setShowInfoModal(true)}
+              className="mt-5 inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-600 text-white h-10 px-5 rounded-lg text-[13px] font-semibold transition-all hover:-translate-y-px cursor-pointer"
+            >
+              Cara Kerja SAW <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="space-y-3">
+            {[
+              { icon: Crosshair, title: "Jarak GPS Real-time", desc: "Sistem mengukur koordinat lintang/bujur Anda ke kos secara presisi (Cost)." },
+              { icon: Zap, title: "Simple Additive Weighting", desc: "Menggabungkan bobot kriteria benefit dan cost menjadi nilai alternatif total." },
+              { icon: Shield, title: "Skor Objektif Transparan", desc: "Rekomendasi murni berdasarkan data fasilitas dan harga, bebas sponsor bias." },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="flex items-start gap-3 bg-surface-tint border border-line rounded-xl p-4 text-left hover:shadow-[0_4px_16px_rgba(15,15,20,0.06)] transition-shadow">
+                <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-[18px] h-[18px] text-brand-700" />
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold text-[14px]">{title}</h3>
+                  <p className="text-[12px] text-ink-500 leading-relaxed mt-0.5">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Final CTA Band (design.md §5.17) ─── */}
+      <section className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 pb-14">
+        <div className="bg-grad-cta rounded-[24px] py-14 px-6 text-center text-white">
+          <h2 className="font-display text-[26px] md:text-[32px] font-bold tracking-[-0.02em]">
+            Siap menemukan kos terbaikmu?
+          </h2>
+          <p className="text-[13px] text-white/90 mt-2 max-w-md mx-auto">
+            Jelajahi seluruh listing kos yang sudah tervalidasi dan bandingkan skornya sekarang.
+          </p>
+          <Link
+            href="/explore"
+            className="mt-6 inline-flex items-center gap-2 bg-white text-ink-900 h-10 px-6 rounded-lg text-[13px] font-semibold hover:bg-brand-100 transition-colors"
+          >
+            Mulai Eksplorasi <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ─── SAW Criteria Info Modal ─── */}
       {showInfoModal && (
-        <div className="fixed inset-0 z-50 bg-[#0F1111]/50 flex items-center justify-center p-4 backdrop-blur-[1px]">
-          <div className="bg-white rounded-lg max-w-md w-full p-5 shadow-[0_0_6px_rgba(15,17,17,0.15)] border border-[#D5D9D9] relative text-left">
-            <button 
+        <div className="fixed inset-0 z-50 bg-ink-900/50 flex items-center justify-center p-4">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Pembobotan Kriteria SAW"
+            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-[0_4px_16px_rgba(15,15,20,0.12)] relative text-left"
+          >
+            <button
               onClick={() => setShowInfoModal(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer"
+              aria-label="Tutup"
+              className="absolute top-4 right-4 text-ink-500 hover:text-ink-900 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
-            <h3 className="text-[18px] font-bold text-[#0F1111] mb-3.5 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-[#FF9900] fill-[#FF9900]" />
+            <h3 className="font-display text-[18px] font-bold text-ink-900 mb-3 flex items-center gap-2">
+              <Zap className="w-5 h-5 fill-brand-700 text-brand-700" />
               Pembobotan Kriteria SAW
             </h3>
-            <p className="text-[13px] text-[#565959] mb-4">
-              Website ini menyusun peringkat kos menggunakan metode **Simple Additive Weighting (SAW)**. Perhitungan didasarkan pada bobot kriteria resmi berikut:
+            <p className="text-[13px] text-ink-700 mb-4">
+              Website ini menyusun peringkat kos menggunakan metode Simple Additive Weighting (SAW). Perhitungan didasarkan pada bobot kriteria resmi berikut:
             </p>
 
             {/* Criteria Progress */}
@@ -340,23 +526,22 @@ export default function LandingPageInteractive({ initialKos, totalKos }: Landing
                 { name: "C6 Akses Transportasi (Benefit)", weight: 10, desc: "Kemudahan angkutan & transit" },
               ].map((c) => (
                 <div key={c.name} className="space-y-1">
-                  <div className="flex justify-between text-[12px] font-bold text-[#0F1111]">
+                  <div className="flex justify-between text-[12px] font-semibold text-ink-900">
                     <span>{c.name}</span>
                     <span>{c.weight}%</span>
                   </div>
-                  <div className="h-2 bg-[#F0F2F2] rounded overflow-hidden">
-                    <div className="h-full bg-[#FF9900] rounded" style={{ width: `${c.weight}%` }} />
+                  <div className="h-2 bg-surface-muted rounded-full overflow-hidden">
+                    <div className="h-full bg-brand-600 rounded-full" style={{ width: `${c.weight}%` }} />
                   </div>
-                  <p className="text-[11px] text-[#565959]">{c.desc}</p>
+                  <p className="text-[11px] text-ink-500">{c.desc}</p>
                 </div>
               ))}
             </div>
 
-            <div className="flex justify-end pt-3 border-t border-[#D5D9D9]">
-              {/* Gold Add to Cart style button */}
-              <button 
+            <div className="flex justify-end pt-3 border-t border-line">
+              <button
                 onClick={() => setShowInfoModal(false)}
-                className="bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] border border-[#F7CA00] rounded text-[13px] font-normal h-8 px-4 shadow-sm cursor-pointer"
+                className="bg-brand-700 hover:bg-brand-600 text-white rounded-lg text-[13px] font-semibold h-9 px-4 transition-colors cursor-pointer"
               >
                 Saya Mengerti
               </button>

@@ -39,7 +39,7 @@ export default async function SellerNewKosPage() {
       <Link href="/seller/kos" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
         <ArrowLeft className="w-4 h-4" /> Kembali
       </Link>
-      <h1 className="text-2xl font-bold mb-6">Tambah Listing Kos</h1>
+      <h1 className="font-display text-[26px] md:text-[30px] font-bold tracking-[-0.02em] mb-6">Tambah Listing Kos</h1>
 
       <form action={createSellerKos.bind(null, userId)} className="space-y-5 bg-white p-6 rounded-2xl border border-border">
         <div className="space-y-1.5">

@@ -47,84 +47,114 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Orange Cart Custom Color Utilities */
-  --color-primary-hover: #E88B00;
-  --color-secondary-hover: #37475A;
-  --color-gold-button: #FFD814;
-  --color-gold-button-hover: #F7CA00;
-  --color-buy-button: #FFA41C;
-  --color-buy-button-hover: #FA8900;
-  --color-teal-link: #007185;
-  --color-teal-link-hover: #004B57;
-  --color-success-green: #067D62;
-  --color-warning-orange: #CC5500;
-  --color-error-red: #B12704;
-  --color-surface-gray: #F0F2F2;
-  --color-neutral-gray: #565959;
+  /* BrandSurge Design Tokens (docs/design.md) */
+  --color-brand-900: #3B1F8C;
+  --color-brand-700: #5B2DC4;
+  --color-brand-600: #6D3FE0;
+  --color-brand-100: #EFE9FD;
+  --color-ink-900: #0F0F14;
+  --color-ink-700: #3A3A46;
+  --color-ink-500: #757585;
+  --color-line: #E6E8F0;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F5F5F7;
+  --color-surface-tint: #EEF4FF;
+  --color-badge-blue: #4A9BF5;
+  --color-star: #FFB400;
+  --color-eco: #2FB26B;
+  --font-display: var(--font-jakarta);
 }
 
 :root {
+  /* shadcn tokens — remapped to BrandSurge (docs/design.md) */
   --background: #FFFFFF;
-  --foreground: #0F1111;
+  --foreground: #0F0F14;
   --card: #FFFFFF;
-  --card-foreground: #0F1111;
+  --card-foreground: #0F0F14;
   --popover: #FFFFFF;
-  --popover-foreground: #0F1111;
-  --primary: #FF9900;
+  --popover-foreground: #0F0F14;
+  --primary: #5B2DC4;
   --primary-foreground: #FFFFFF;
-  --secondary: #232F3E;
-  --secondary-foreground: #FFFFFF;
-  --muted: #F0F2F2;
-  --muted-foreground: #565959;
-  --accent: #007185;
-  --accent-foreground: #FFFFFF;
-  --destructive: #B12704;
-  --border: #D5D9D9;
-  --input: #888C8C;
-  --ring: #C8F3FA;
-  --chart-1: #FF9900;
-  --chart-2: #007185;
-  --chart-3: #232F3E;
-  --chart-4: #CC5500;
-  --chart-5: #067D62;
-  --radius: 8px;
-  --sidebar: #232F3E;
-  --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #FF9900;
+  --secondary: #EFE9FD;
+  --secondary-foreground: #5B2DC4;
+  --muted: #F5F5F7;
+  --muted-foreground: #757585;
+  --accent: #EFE9FD;
+  --accent-foreground: #5B2DC4;
+  --destructive: #DC2626;
+  --border: #E6E8F0;
+  --input: #E6E8F0;
+  --ring: #D4C5F9;
+  --chart-1: #5B2DC4;
+  --chart-2: #4A9BF5;
+  --chart-3: #2FB26B;
+  --chart-4: #FFB400;
+  --chart-5: #6D3FE0;
+  --radius: 12px;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #3A3A46;
+  --sidebar-primary: #5B2DC4;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #37475A;
-  --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #D5D9D9;
-  --sidebar-ring: #C8F3FA;
+  --sidebar-accent: #EFE9FD;
+  --sidebar-accent-foreground: #5B2DC4;
+  --sidebar-border: #E6E8F0;
+  --sidebar-ring: #D4C5F9;
 }
 
+/* BrandSurge gradient tokens (docs/design.md §2/§11) */
+:root {
+  --grad-hero: linear-gradient(180deg, #C7E6FA, #9ED2F5);
+  --grad-drinkware: linear-gradient(180deg, #8DB8F2, #6FA0EA);
+  --grad-bags: linear-gradient(180deg, #9FD0F5, #7BB6EE);
+  --grad-tech: linear-gradient(180deg, #B8A2F2, #9C86E8);
+  --grad-apparel: linear-gradient(180deg, #F7C95A, #F2A93B);
+  --grad-office: linear-gradient(180deg, #5E9BE8, #3F7FD6);
+  --grad-headwear: linear-gradient(180deg, #F6A9C9, #F28DB8);
+  --grad-express: linear-gradient(180deg, #A9DFF7, #8CCBF2);
+  --grad-premium: linear-gradient(180deg, #A98BF0, #8E70E6);
+  --grad-eco: linear-gradient(180deg, #8FE0AE, #62CF8F);
+  --grad-cta: linear-gradient(135deg, #6AA9F8, #3D6FED);
+}
+
+@utility bg-grad-hero { background-image: var(--grad-hero); }
+@utility bg-grad-drinkware { background-image: var(--grad-drinkware); }
+@utility bg-grad-bags { background-image: var(--grad-bags); }
+@utility bg-grad-tech { background-image: var(--grad-tech); }
+@utility bg-grad-apparel { background-image: var(--grad-apparel); }
+@utility bg-grad-office { background-image: var(--grad-office); }
+@utility bg-grad-headwear { background-image: var(--grad-headwear); }
+@utility bg-grad-express { background-image: var(--grad-express); }
+@utility bg-grad-premium { background-image: var(--grad-premium); }
+@utility bg-grad-eco { background-image: var(--grad-eco); }
+@utility bg-grad-cta { background-image: var(--grad-cta); }
+
 .dark {
-  --background: #0F1111;
-  --foreground: #F0F2F2;
-  --card: #232F3E;
-  --card-foreground: #FFFFFF;
-  --popover: #232F3E;
-  --popover-foreground: #FFFFFF;
-  --primary: #FF9900;
+  --background: #0F0F14;
+  --foreground: #F5F5F7;
+  --card: #17171E;
+  --card-foreground: #F5F5F7;
+  --popover: #17171E;
+  --popover-foreground: #F5F5F7;
+  --primary: #6D3FE0;
   --primary-foreground: #FFFFFF;
-  --secondary: #F0F2F2;
-  --secondary-foreground: #0F1111;
-  --muted: #37475A;
-  --muted-foreground: #D5D9D9;
-  --accent: #007185;
-  --accent-foreground: #FFFFFF;
-  --destructive: #B12704;
-  --border: #37475A;
-  --input: #565959;
-  --ring: #C8F3FA;
-  --sidebar: #0F1111;
-  --sidebar-foreground: #F0F2F2;
-  --sidebar-primary: #FF9900;
+  --secondary: #23232C;
+  --secondary-foreground: #F5F5F7;
+  --muted: #23232C;
+  --muted-foreground: #A0A0AE;
+  --accent: #2A2440;
+  --accent-foreground: #D4C5F9;
+  --destructive: #DC2626;
+  --border: #2A2A34;
+  --input: #2A2A34;
+  --ring: #6D3FE0;
+  --sidebar: #17171E;
+  --sidebar-foreground: #F5F5F7;
+  --sidebar-primary: #6D3FE0;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #232F3E;
-  --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #37475A;
-  --sidebar-ring: #C8F3FA;
+  --sidebar-accent: #2A2440;
+  --sidebar-accent-foreground: #D4C5F9;
+  --sidebar-border: #2A2A34;
+  --sidebar-ring: #6D3FE0;
 }
 
 @layer base {

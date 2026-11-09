@@ -19,12 +19,12 @@ export default async function EditKosPage({
 
   return (
     <div className="p-8 max-w-2xl">
-      <Link href="/admin/kos" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-foreground mb-6 transition-colors">
+      <Link href="/admin/kos" className="inline-flex items-center gap-2 text-sm text-ink-500 hover:text-foreground mb-6 transition-colors">
         <ArrowLeft className="w-4 h-4" />
         Kembali ke Daftar Kos
       </Link>
 
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">Edit Kos</h1>
+      <h1 className="font-display tracking-[-0.02em] text-[26px] md:text-[30px] font-bold text-ink-900 mb-6">Edit Kos</h1>
 
       <form
         action={async (formData) => {

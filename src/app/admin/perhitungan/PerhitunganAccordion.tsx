@@ -65,17 +65,17 @@ export function PerhitunganAccordion({
   const renderPaginationControls = () => {
     if (totalPages <= 1) return null;
     return (
-      <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-slate-50/50">
-        <div className="text-xs text-slate-500 font-medium">
-          Menampilkan <span className="font-semibold text-slate-700">{startIndex + 1}</span> -{" "}
-          <span className="font-semibold text-slate-700">{endIndex}</span> dari{" "}
-          <span className="font-semibold text-slate-700">{totalItems}</span> kos
+      <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-surface-muted/50">
+        <div className="text-xs text-ink-500 font-medium">
+          Menampilkan <span className="font-semibold text-ink-700">{startIndex + 1}</span> -{" "}
+          <span className="font-semibold text-ink-700">{endIndex}</span> dari{" "}
+          <span className="font-semibold text-ink-700">{totalItems}</span> kos
         </div>
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="p-1.5 rounded-lg border border-border bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg border border-border bg-white text-ink-700 hover:bg-surface-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
             title="Halaman Sebelumnya"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -94,14 +94,14 @@ export function PerhitunganAccordion({
               return (
                 <div key={page} className="flex items-center">
                   {showEllipsis && (
-                    <span className="px-2 text-slate-400 text-xs select-none">...</span>
+                    <span className="px-2 text-ink-500 text-xs select-none">...</span>
                   )}
                   <button
                     onClick={() => setCurrentPage(page)}
                     className={`min-w-[32px] h-8 px-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                       currentPage === page
-                        ? "bg-[#FF9900] text-white"
-                        : "border border-border bg-white text-slate-600 hover:bg-slate-50"
+                        ? "bg-brand-700 text-white"
+                        : "border border-border bg-white text-ink-700 hover:bg-surface-muted"
                     }`}
                   >
                     {page}
@@ -113,7 +113,7 @@ export function PerhitunganAccordion({
           <button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="p-1.5 rounded-lg border border-border bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg border border-border bg-white text-ink-700 hover:bg-surface-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
             title="Halaman Selanjutnya"
           >
             <ChevronRight className="w-4 h-4" />
@@ -129,13 +129,13 @@ export function PerhitunganAccordion({
       description: "Bobot prioritas untuk masing-masing kriteria penilaian (C1 - C6).",
       icon: BarChart3,
       render: () => (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 p-6 bg-slate-50/30">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 p-6 bg-surface-muted/30">
           {criteriaList.map((c) => (
             <div key={c.id} className="bg-white rounded-xl border border-border p-4 text-center shadow-sm">
-              <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">{c.code}</div>
-              <div className="text-sm font-bold text-slate-800 mb-1 truncate">{c.name}</div>
-              <div className="text-xl font-extrabold text-[#CC5500]">{c.weight}</div>
-              <div className="text-[10px] text-muted-foreground uppercase font-bold mt-1.5 px-2 py-0.5 bg-slate-50 border border-slate-100 rounded-full inline-block">
+              <div className="text-xs font-semibold text-ink-500 uppercase tracking-wider mb-1">{c.code}</div>
+              <div className="text-sm font-bold text-ink-900 mb-1 truncate">{c.name}</div>
+              <div className="text-xl font-bold text-brand-700">{c.weight}</div>
+              <div className="text-[10px] text-muted-foreground uppercase font-bold mt-1.5 px-2 py-0.5 bg-surface-muted border border-line rounded-full inline-block">
                 {c.attribute}
               </div>
             </div>
@@ -151,20 +151,20 @@ export function PerhitunganAccordion({
         <div>
           <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
             <table className="w-full text-sm text-left border-collapse">
-              <thead className="text-xs uppercase bg-slate-50 text-slate-500 border-b border-border sticky top-0 z-10">
+              <thead className="text-xs uppercase bg-surface-muted text-ink-500 border-b border-border sticky top-0 z-10">
                 <tr>
-                  <th className="px-6 py-3.5 font-bold bg-slate-50">Nama Kos</th>
+                  <th className="px-6 py-3.5 font-bold bg-surface-muted">Nama Kos</th>
                   {criteriaList.map((c) => (
-                    <th key={c.id} className="px-6 py-3.5 font-bold text-center bg-slate-50">{c.code}</th>
+                    <th key={c.id} className="px-6 py-3.5 font-bold text-center bg-surface-muted">{c.code}</th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {paginatedRanked.map(({ kos }) => (
-                  <tr key={kos.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-3.5 font-medium text-slate-800">{kos.name}</td>
+                  <tr key={kos.id} className="hover:bg-surface-muted/50 transition-colors">
+                    <td className="px-6 py-3.5 font-medium text-ink-900">{kos.name}</td>
                     {criteriaList.map((c) => (
-                      <td key={c.id} className="px-6 py-3.5 text-center text-slate-600 font-semibold">
+                      <td key={c.id} className="px-6 py-3.5 text-center text-ink-700 font-semibold">
                         {scoreMatrix[kos.id]?.[c.code] ?? 0}
                       </td>
                     ))}
@@ -185,18 +185,18 @@ export function PerhitunganAccordion({
         <div>
           <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
             <table className="w-full text-sm text-left border-collapse">
-              <thead className="text-xs uppercase bg-slate-50 text-slate-500 border-b border-border sticky top-0 z-10">
+              <thead className="text-xs uppercase bg-surface-muted text-ink-500 border-b border-border sticky top-0 z-10">
                 <tr>
-                  <th className="px-6 py-3.5 font-bold bg-slate-50">Nama Kos</th>
+                  <th className="px-6 py-3.5 font-bold bg-surface-muted">Nama Kos</th>
                   {criteriaList.map((c) => (
-                    <th key={c.id} className="px-6 py-3.5 font-bold text-center bg-slate-50">{c.code}</th>
+                    <th key={c.id} className="px-6 py-3.5 font-bold text-center bg-surface-muted">{c.code}</th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {paginatedRanked.map(({ kos }) => (
-                  <tr key={kos.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-3.5 font-medium text-slate-800">{kos.name}</td>
+                  <tr key={kos.id} className="hover:bg-surface-muted/50 transition-colors">
+                    <td className="px-6 py-3.5 font-medium text-ink-900">{kos.name}</td>
                     {criteriaList.map((c) => (
                       <td key={c.id} className="px-6 py-3.5 text-center text-emerald-600 font-bold">
                         {(normalMatrix[kos.id]?.[c.code] ?? 0).toFixed(4)}
@@ -219,18 +219,18 @@ export function PerhitunganAccordion({
         <div>
           <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
             <table className="w-full text-sm text-left border-collapse">
-              <thead className="text-xs uppercase bg-slate-50 text-slate-500 border-b border-border sticky top-0 z-10">
+              <thead className="text-xs uppercase bg-surface-muted text-ink-500 border-b border-border sticky top-0 z-10">
                 <tr>
-                  <th className="px-6 py-3.5 font-bold bg-slate-50">Nama Kos</th>
-                  <th className="px-6 py-3.5 font-bold bg-slate-50">Formula Terbobot (W * R)</th>
-                  <th className="px-6 py-3.5 font-bold text-right bg-slate-50">Hasil (V)</th>
+                  <th className="px-6 py-3.5 font-bold bg-surface-muted">Nama Kos</th>
+                  <th className="px-6 py-3.5 font-bold bg-surface-muted">Formula Terbobot (W * R)</th>
+                  <th className="px-6 py-3.5 font-bold text-right bg-surface-muted">Hasil (V)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {paginatedRanked.map(({ kos, score, steps }) => (
-                  <tr key={kos.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-3.5 font-medium text-slate-800">{kos.name}</td>
-                    <td className="px-6 py-3.5 font-mono text-[11px] text-slate-500 leading-normal max-w-lg truncate hover:text-clip">
+                  <tr key={kos.id} className="hover:bg-surface-muted/50 transition-colors">
+                    <td className="px-6 py-3.5 font-medium text-ink-900">{kos.name}</td>
+                    <td className="px-6 py-3.5 font-mono text-[11px] text-ink-500 leading-normal max-w-lg truncate hover:text-clip">
                       {criteriaList.map((c, idx) => (
                         <span key={c.id}>
                           {steps[c.code]}
@@ -238,7 +238,7 @@ export function PerhitunganAccordion({
                         </span>
                       ))}
                     </td>
-                    <td className="px-6 py-3.5 text-right font-extrabold text-[#007185] text-sm">
+                    <td className="px-6 py-3.5 text-right font-bold text-brand-700 text-sm">
                       {score.toFixed(4)}
                     </td>
                   </tr>
@@ -258,33 +258,33 @@ export function PerhitunganAccordion({
         <div>
           <div className="overflow-x-auto max-h-[480px] overflow-y-auto">
             <table className="w-full text-sm text-left border-collapse">
-              <thead className="text-xs uppercase bg-slate-50 text-slate-500 border-b border-border sticky top-0 z-10">
+              <thead className="text-xs uppercase bg-surface-muted text-ink-500 border-b border-border sticky top-0 z-10">
                 <tr>
-                  <th className="px-6 py-3.5 font-bold text-center w-20 bg-slate-50">Rank</th>
-                  <th className="px-6 py-3.5 font-bold bg-slate-50">Nama Kos</th>
-                  <th className="px-6 py-3.5 font-bold text-right bg-slate-50">Skor Preferensi (V)</th>
+                  <th className="px-6 py-3.5 font-bold text-center w-20 bg-surface-muted">Rank</th>
+                  <th className="px-6 py-3.5 font-bold bg-surface-muted">Nama Kos</th>
+                  <th className="px-6 py-3.5 font-bold text-right bg-surface-muted">Skor Preferensi (V)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {paginatedRanked.map(({ kos, score }, index) => {
                   const actualRank = startIndex + index + 1;
                   return (
-                    <tr key={kos.id} className="hover:bg-slate-50/50 transition-colors">
+                    <tr key={kos.id} className="hover:bg-surface-muted/50 transition-colors">
                       <td className="px-6 py-3 text-center">
-                        <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold text-white shadow-sm ${
+                        <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold shadow-sm ${
                           actualRank === 1 
-                            ? "bg-gradient-to-r from-amber-500 to-[#FF9900]" 
+                            ? "bg-star text-ink-900" 
                             : actualRank === 2 
-                            ? "bg-slate-400" 
+                            ? "bg-badge-blue text-white" 
                             : actualRank === 3 
-                            ? "bg-amber-700" 
-                            : "bg-slate-300"
+                            ? "bg-brand-600 text-white" 
+                            : "bg-surface-muted text-ink-700 border border-line"
                         }`}>
                           {actualRank}
                         </span>
                       </td>
-                      <td className="px-6 py-3 font-semibold text-slate-950">{kos.name}</td>
-                      <td className="px-6 py-3 text-right font-extrabold text-[#CC5500] text-base">
+                      <td className="px-6 py-3 font-semibold text-ink-900">{kos.name}</td>
+                      <td className="px-6 py-3 text-right font-bold text-brand-700 text-base">
                         {score.toFixed(4)}
                       </td>
                     </tr>
@@ -310,31 +310,31 @@ export function PerhitunganAccordion({
             {/* Header Accordion Toggle */}
             <button
               onClick={() => toggleSection(idx)}
-              className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-slate-50 transition-colors focus:outline-none border-none cursor-pointer"
+              className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-surface-muted transition-colors focus:outline-none border-none cursor-pointer"
             >
               <div className="flex items-center gap-3">
                 <div className={`p-2 rounded-lg ${
-                  isOpen ? "bg-[#FFF0A5] text-[#805000]" : "bg-slate-100 text-slate-500"
+                  isOpen ? "bg-brand-100 text-brand-700" : "bg-surface-muted text-ink-500"
                 }`}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-[14px] md:text-[15px] font-bold text-slate-900">{step.title}</h3>
-                  <p className="text-[11px] md:text-[12px] text-slate-500 mt-0.5 font-normal">{step.description}</p>
+                  <h3 className="text-[14px] md:text-[15px] font-display font-semibold tracking-[-0.02em] text-ink-900">{step.title}</h3>
+                  <p className="text-[11px] md:text-[12px] text-ink-500 mt-0.5 font-normal">{step.description}</p>
                 </div>
               </div>
               <div>
                 {isOpen ? (
-                  <ChevronUp className="w-5 h-5 text-slate-400" />
+                  <ChevronUp className="w-5 h-5 text-ink-500" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-400" />
+                  <ChevronDown className="w-5 h-5 text-ink-500" />
                 )}
               </div>
             </button>
 
             {/* Content panel */}
             {isOpen && (
-              <CardContent className="p-0 border-t border-slate-100">
+              <CardContent className="p-0 border-t border-line">
                 {step.render()}
               </CardContent>
             )}

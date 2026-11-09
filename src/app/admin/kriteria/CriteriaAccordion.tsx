@@ -45,8 +45,8 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2 mb-2 px-1">
-        <Sliders className="w-5 h-5 text-teal-600" />
-        <h2 className="font-bold text-slate-800 text-sm">Kelola Detail Sub-Kriteria (Data C)</h2>
+        <Sliders className="w-5 h-5 text-brand-700" />
+        <h2 className="font-display font-semibold tracking-[-0.02em] text-ink-900 text-sm">Kelola Detail Sub-Kriteria (Data C)</h2>
       </div>
 
       {criteria.map((c) => {
@@ -56,39 +56,39 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
             {/* Accordion Header */}
             <button
               onClick={() => toggleSection(c.id)}
-              className="w-full flex items-center justify-between px-5 py-4 bg-slate-50/70 hover:bg-slate-50 transition-colors text-left"
+              className="w-full flex items-center justify-between px-5 py-4 bg-surface-muted/70 hover:bg-surface-muted transition-colors text-left"
             >
               <div className="flex items-center gap-3">
-                <span className="font-mono font-black text-[#FF9900] text-sm bg-orange-50 border border-orange-100 px-2.5 py-0.5 rounded-lg">
+                <span className="font-mono font-semibold text-brand-700 text-sm bg-brand-100 border border-brand-600/20 px-2.5 py-0.5 rounded-full">
                   {c.code}
                 </span>
                 <div>
-                  <span className="text-sm font-bold text-slate-800">{c.name}</span>
-                  <span className="text-xs text-slate-400 block mt-0.5">
+                  <span className="text-sm font-bold text-ink-900">{c.name}</span>
+                  <span className="text-xs text-ink-500 block mt-0.5">
                     Bobot: {c.weight.toFixed(2)} | Atribut: {c.attribute}
                   </span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
-                  c.attribute === "BENEFIT" ? "bg-green-50 text-green-700 border border-green-150" : "bg-orange-50 text-orange-700 border border-orange-150"
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                  c.attribute === "BENEFIT" ? "bg-green-50 text-green-700 border border-green-150" : "bg-brand-100 text-brand-700 border border-brand-600/20"
                 }`}>
                   {c.attribute}
                 </span>
                 {isOpen ? (
-                  <ChevronUp className="w-4 h-4 text-slate-400" />
+                  <ChevronUp className="w-4 h-4 text-ink-500" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <ChevronDown className="w-4 h-4 text-ink-500" />
                 )}
               </div>
             </button>
 
             {/* Accordion Body */}
             {isOpen && (
-              <div className="border-t border-slate-100">
+              <div className="border-t border-line">
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs text-left">
-                    <thead className="text-[10px] font-bold uppercase bg-slate-50/50 text-slate-500 border-b border-border">
+                    <thead className="text-[10px] font-bold uppercase bg-surface-muted/50 text-ink-500 border-b border-border">
                       <tr>
                         <th className="py-2.5 px-5">Keterangan / Kategori</th>
                         <th className="py-2.5 px-5">Nilai / Range Matriks</th>
@@ -98,10 +98,10 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
                     </thead>
                     <tbody className="divide-y divide-border">
                       {c.subCriteria.map((sub) => (
-                        <tr key={sub.id} className="hover:bg-slate-50/30 transition-colors">
-                          <td className="py-3 px-5 font-medium text-slate-800">{sub.name}</td>
-                          <td className="py-3 px-5 text-slate-500 font-mono">{sub.value}</td>
-                          <td className="py-3 px-5 text-center font-extrabold text-[#CC5500]">{sub.score}</td>
+                        <tr key={sub.id} className="hover:bg-surface-muted/30 transition-colors">
+                          <td className="py-3 px-5 font-medium text-ink-900">{sub.name}</td>
+                          <td className="py-3 px-5 text-ink-500 font-mono">{sub.value}</td>
+                          <td className="py-3 px-5 text-center font-bold text-brand-700">{sub.score}</td>
                           <td className="py-3 px-5 text-right">
                             <button
                               onClick={async () => {
@@ -109,7 +109,7 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
                                   await deleteSubCriteria(sub.id);
                                 }
                               }}
-                              className="p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                              className="p-1 rounded-lg text-ink-500 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                               title="Hapus Sub Kriteria"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -119,7 +119,7 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
                       ))}
                       {c.subCriteria.length === 0 && (
                         <tr>
-                          <td colSpan={4} className="py-6 text-center text-slate-400 italic">
+                          <td colSpan={4} className="py-6 text-center text-ink-500 italic">
                             Belum ada sub-kriteria. Tambahkan di bawah.
                           </td>
                         </tr>
@@ -129,15 +129,15 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
                 </div>
 
                 {/* Form to Add Sub Criteria */}
-                <div className="p-5 bg-slate-50/30 border-t border-slate-100">
+                <div className="p-5 bg-surface-muted/30 border-t border-line">
                   <form action={createSubCriteria} className="space-y-3">
                     <input type="hidden" name="criteriaId" value={c.id} />
-                    <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    <div className="text-[11px] font-bold text-ink-500 uppercase tracking-wider mb-2">
                       Tambah Sub-Kriteria Baru
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       <div className="space-y-1">
-                        <label className="text-[10px] font-semibold text-slate-500">Keterangan Label</label>
+                        <label className="text-[10px] font-semibold text-ink-500">Keterangan Label</label>
                         <Input 
                           name="name" 
                           placeholder="Sangat Dekat (misal)" 
@@ -146,7 +146,7 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-semibold text-slate-500">Nilai Matrix / Range</label>
+                        <label className="text-[10px] font-semibold text-ink-500">Nilai Matrix / Range</label>
                         <Input 
                           name="value" 
                           placeholder="1 (atau <= 500m)" 
@@ -155,7 +155,7 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-semibold text-slate-500">Skor Bobot (20-100)</label>
+                        <label className="text-[10px] font-semibold text-ink-500">Skor Bobot (20-100)</label>
                         <Input 
                           name="score" 
                           type="number" 
@@ -167,7 +167,7 @@ export function CriteriaAccordion({ criteria }: CriteriaAccordionProps) {
                         />
                       </div>
                     </div>
-                    <Button type="submit" size="sm" variant="outline" className="h-9 text-xs rounded-xl w-full border-dashed border-teal-300 text-teal-700 hover:bg-teal-50 hover:text-teal-800 transition-colors cursor-pointer mt-1">
+                    <Button type="submit" size="sm" variant="outline" className="h-9 text-xs rounded-xl w-full border-dashed border-brand-600/20 text-brand-700 hover:bg-brand-100 hover:text-brand-700 transition-colors cursor-pointer mt-1">
                       <Plus className="w-3.5 h-3.5 mr-1" /> Simpan Sub-Kriteria
                     </Button>
                   </form>

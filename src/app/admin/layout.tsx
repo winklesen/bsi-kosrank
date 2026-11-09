@@ -6,7 +6,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50">
+    <div className="flex h-screen overflow-hidden bg-surface-muted/50">
       <AdminSidebar />
       <main className="flex-1 h-full overflow-y-auto">{children}</main>
     </div>

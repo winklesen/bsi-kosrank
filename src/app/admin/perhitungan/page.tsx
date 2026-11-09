@@ -40,17 +40,17 @@ export default async function PerhitunganPage({
     return (
       <div className="p-8 max-w-7xl mx-auto space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Data Perhitungan SAW</h1>
-          <p className="text-slate-500 text-sm mt-1">
+          <h1 className="font-display text-[26px] md:text-[30px] font-bold text-ink-900">Data Perhitungan SAW</h1>
+          <p className="text-ink-500 text-sm mt-1">
             Proses perhitungan metode Simple Additive Weighting (SAW) untuk menentukan peringkat kos terbaik.
           </p>
         </div>
         <div className="bg-white rounded-2xl border border-border p-12 text-center max-w-md mx-auto shadow-sm mt-10">
-          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100">
-            <Calculator className="w-8 h-8 text-slate-400" />
+          <div className="w-16 h-16 bg-surface-muted rounded-2xl flex items-center justify-center mx-auto mb-4 border border-line">
+            <Calculator className="w-8 h-8 text-ink-500" />
           </div>
-          <h2 className="text-lg font-semibold text-slate-800">Belum Ada Data Kos</h2>
-          <p className="text-slate-500 text-sm mt-1 mb-6">
+          <h2 className="text-lg font-display font-semibold tracking-[-0.02em] text-ink-900">Belum Ada Data Kos</h2>
+          <p className="text-ink-500 text-sm mt-1 mb-6">
             Silakan masukkan data kos terlebih dahulu untuk melihat hasil matriks keputusan, normalisasi, dan perankingan.
           </p>
           <Link href="/admin/kos/new">
@@ -66,8 +66,8 @@ export default async function PerhitunganPage({
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Data Perhitungan SAW</h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <h1 className="font-display text-[26px] md:text-[30px] font-bold text-ink-900">Data Perhitungan SAW</h1>
+        <p className="text-ink-500 text-sm mt-1">
           Proses perhitungan metode Simple Additive Weighting (SAW) untuk menentukan peringkat kos terbaik.
         </p>
       </div>
@@ -81,11 +81,11 @@ export default async function PerhitunganPage({
       {/* SAW Calculation Result */}
       {ranked.length === 0 ? (
         <div className="bg-white rounded-2xl border border-border p-12 text-center max-w-md mx-auto shadow-sm">
-          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100">
-            <Calculator className="w-8 h-8 text-slate-400" />
+          <div className="w-16 h-16 bg-surface-muted rounded-2xl flex items-center justify-center mx-auto mb-4 border border-line">
+            <Calculator className="w-8 h-8 text-ink-500" />
           </div>
-          <h2 className="text-lg font-semibold text-slate-800">Tidak Ada Kos Terpilih</h2>
-          <p className="text-slate-500 text-sm mt-1">
+          <h2 className="text-lg font-display font-semibold tracking-[-0.02em] text-ink-900">Tidak Ada Kos Terpilih</h2>
+          <p className="text-ink-500 text-sm mt-1">
             Pilih minimal satu kos dari daftar di atas untuk melihat hasil perhitungan SAW.
           </p>
         </div>

@@ -171,25 +171,25 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
       <div className="bg-white rounded-2xl border border-border p-4 shadow-sm flex flex-col lg:flex-row gap-3.5 items-stretch lg:items-center">
         {/* Search Input */}
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-2.5 h-4.5 w-4.5 text-slate-400" />
+          <Search className="absolute left-3.5 top-2.5 h-4.5 w-4.5 text-ink-500" />
           <input
             type="text"
             placeholder="Cari nama kos atau alamat..."
             value={searchQuery}
             onChange={handleSearchChange}
-            className="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder-slate-400"
+            className="w-full pl-10 pr-4 py-2 text-sm bg-surface-muted border border-line rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder-ink-500"
           />
         </div>
 
         {/* Filter Controls Row */}
         <div className="flex flex-wrap lg:flex-nowrap gap-2.5 items-center justify-between lg:justify-end">
           {/* Gender Filter */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5">
-            <Filter className="w-3.5 h-3.5 text-slate-500" />
+          <div className="flex items-center gap-1.5 bg-surface-muted border border-line rounded-xl px-2.5 py-1.5">
+            <Filter className="w-3.5 h-3.5 text-ink-500" />
             <select
               value={selectedGender}
               onChange={handleGenderChange}
-              className="bg-transparent text-xs font-semibold text-slate-700 outline-none cursor-pointer pr-1"
+              className="bg-transparent text-xs font-semibold text-ink-700 outline-none cursor-pointer pr-1"
             >
               <option value="">Semua Tipe Gender</option>
               <option value="PUTRA">Putra</option>
@@ -199,12 +199,12 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
           </div>
 
           {/* Campus Filter */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500" />
+          <div className="flex items-center gap-1.5 bg-surface-muted border border-line rounded-xl px-2.5 py-1.5">
+            <SlidersHorizontal className="w-3.5 h-3.5 text-ink-500" />
             <select
               value={selectedCampus}
               onChange={handleCampusChange}
-              className="bg-transparent text-xs font-semibold text-slate-700 outline-none cursor-pointer pr-1"
+              className="bg-transparent text-xs font-semibold text-ink-700 outline-none cursor-pointer pr-1"
             >
               <option value="">Semua Kampus</option>
               {uniqueCampuses.map((c) => (
@@ -214,12 +214,12 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
           </div>
 
           {/* Sorting Dropdown */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5">
-            <span className="text-xs font-medium text-slate-400">Urutkan:</span>
+          <div className="flex items-center gap-1.5 bg-surface-muted border border-line rounded-xl px-2.5 py-1.5">
+            <span className="text-xs font-medium text-ink-500">Urutkan:</span>
             <select
               value={sortBy}
               onChange={handleSortChange}
-              className="bg-transparent text-xs font-bold text-slate-700 outline-none cursor-pointer pr-1"
+              className="bg-transparent text-xs font-bold text-ink-700 outline-none cursor-pointer pr-1"
             >
               <option value="ranking-asc">Peringkat SAW</option>
               <option value="price-asc">Harga Terendah</option>
@@ -231,7 +231,7 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
           {/* Action button inside page toolbar */}
           <button 
             onClick={() => setIsCreateOpen(true)}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#FF9900] hover:bg-[#e08800] text-white text-xs font-bold rounded-xl shadow-md shadow-orange-500/10 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 bg-brand-700 hover:bg-brand-600 text-white text-xs font-bold rounded-xl shadow-md shadow-brand-700/10 transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Tambah Kos
@@ -243,7 +243,7 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
       <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left border-collapse">
-            <thead className="text-[11px] font-bold uppercase bg-slate-50 text-slate-500 border-b border-border">
+            <thead className="text-[11px] font-bold uppercase bg-surface-muted text-ink-500 border-b border-border">
               <tr>
                 <th className="py-3.5 px-5 text-center w-24">Peringkat SAW</th>
                 <th className="py-3.5 px-5">Nama Kos</th>
@@ -256,32 +256,32 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
             </thead>
             <tbody className="divide-y divide-border">
               {paginatedList.map((kos) => (
-                <tr key={kos.id} className="hover:bg-slate-50/50 transition-colors">
+                <tr key={kos.id} className="hover:bg-surface-muted/50 transition-colors">
                   <td className="py-4 px-5 text-center">
                     {kos.ranking ? (
                       <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${
                         kos.ranking === 1 
-                          ? "bg-gradient-to-r from-amber-500 to-[#FF9900] text-white shadow-sm"
+                          ? "bg-gradient-to-r from-brand-600 to-brand-700 text-white shadow-sm"
                           : kos.ranking === 2
                           ? "bg-slate-400 text-white shadow-sm"
                           : kos.ranking === 3
-                          ? "bg-amber-700 text-white shadow-sm"
-                          : "bg-slate-100 text-slate-600 border border-slate-200"
+                          ? "bg-brand-100 text-brand-700 shadow-sm"
+                          : "bg-surface-muted text-ink-700 border border-line"
                       }`}>
                         {kos.ranking}
                       </span>
                     ) : (
-                      <span className="text-slate-300 text-xs font-medium">—</span>
+                      <span className="text-ink-500 text-xs font-medium">—</span>
                     )}
                   </td>
                   <td className="py-4 px-5">
-                    <div className="font-bold text-slate-800 text-[13.5px]">{kos.name}</div>
-                    <div className="text-xs text-slate-400 mt-0.5 truncate max-w-sm">{kos.address}</div>
+                    <div className="font-bold text-ink-900 text-[13.5px]">{kos.name}</div>
+                    <div className="text-xs text-ink-500 mt-0.5 truncate max-w-sm">{kos.address}</div>
                   </td>
-                  <td className="py-4 px-5 font-semibold text-slate-700">
+                  <td className="py-4 px-5 font-semibold text-ink-700">
                     Rp {kos.price.toLocaleString("id-ID")}
                   </td>
-                  <td className="py-4 px-5 text-slate-600 font-medium">{kos.campus}</td>
+                  <td className="py-4 px-5 text-ink-700 font-medium">{kos.campus}</td>
                   <td className="py-4 px-5">
                     <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
                       kos.genderType === "PUTRA" ? "bg-blue-50 text-blue-700 border-blue-200" :
@@ -293,26 +293,26 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                   </td>
                   <td className="py-4 px-5">
                     {kos.finalScore != null ? (
-                      <span className="inline-flex items-center gap-1 text-[#CC5500] font-extrabold text-xs">
-                        <Star className="w-3.5 h-3.5 fill-[#FF9900] text-[#FF9900]" />
+                      <span className="inline-flex items-center gap-1 text-brand-700 font-bold text-xs">
+                        <Star className="w-3.5 h-3.5 fill-star text-star" />
                         {kos.finalScore.toFixed(4)}
                       </span>
                     ) : (
-                      <span className="text-slate-400 text-xs italic">Belum dihitung</span>
+                      <span className="text-ink-500 text-xs italic">Belum dihitung</span>
                     )}
                   </td>
                   <td className="py-4 px-5 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button
                         onClick={() => setEditingKos(kos)}
-                        className="p-1.5 rounded-lg border border-slate-150 bg-white text-slate-500 hover:text-[#007185] hover:border-[#007185]/40 hover:bg-[#007185]/5 transition-all cursor-pointer"
+                        className="p-1.5 rounded-lg border border-line bg-white text-ink-500 hover:text-brand-700 hover:border-brand-600/40 hover:bg-brand-100/30 transition-all cursor-pointer"
                         title="Edit Kos"
                       >
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(kos.id, kos.name)}
-                        className="p-1.5 rounded-lg border border-slate-150 bg-white text-slate-500 hover:text-rose-650 hover:border-rose-300 hover:bg-rose-50 transition-all cursor-pointer"
+                        className="p-1.5 rounded-lg border border-line bg-white text-ink-500 hover:text-rose-650 hover:border-rose-300 hover:bg-rose-50 transition-all cursor-pointer"
                         title="Hapus Kos"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -323,7 +323,7 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               ))}
               {totalItems === 0 && (
                 <tr>
-                  <td colSpan={7} className="py-16 text-center text-slate-400 italic">
+                  <td colSpan={7} className="py-16 text-center text-ink-500 italic">
                     Tidak ada alternatif kos yang cocok dengan kriteria pencarian/filter Anda.
                   </td>
                 </tr>
@@ -334,17 +334,17 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-slate-50/50">
-            <div className="text-xs text-slate-500 font-medium">
-              Menampilkan <span className="font-semibold text-slate-700">{startIndex + 1}</span> -{" "}
-              <span className="font-semibold text-slate-700">{endIndex}</span> dari{" "}
-              <span className="font-semibold text-slate-700">{totalItems}</span> kos terdaftar
+          <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-surface-muted/50">
+            <div className="text-xs text-ink-500 font-medium">
+              Menampilkan <span className="font-semibold text-ink-700">{startIndex + 1}</span> -{" "}
+              <span className="font-semibold text-ink-700">{endIndex}</span> dari{" "}
+              <span className="font-semibold text-ink-700">{totalItems}</span> kos terdaftar
             </div>
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="p-1.5 rounded-lg border border-border bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg border border-border bg-white text-ink-700 hover:bg-surface-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -362,14 +362,14 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                   return (
                     <div key={page} className="flex items-center">
                       {showEllipsis && (
-                        <span className="px-2 text-slate-400 text-xs select-none">...</span>
+                        <span className="px-2 text-ink-500 text-xs select-none">...</span>
                       )}
                       <button
                         onClick={() => setCurrentPage(page)}
                         className={`min-w-[32px] h-8 px-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                           currentPage === page
-                            ? "bg-[#FF9900] text-white"
-                            : "border border-border bg-white text-slate-600 hover:bg-slate-50"
+                            ? "bg-brand-700 text-white"
+                            : "border border-border bg-white text-ink-700 hover:bg-surface-muted"
                         }`}
                       >
                         {page}
@@ -381,7 +381,7 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               <button
                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="p-1.5 rounded-lg border border-border bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg border border-border bg-white text-ink-700 hover:bg-surface-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -393,16 +393,16 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
       {/* CREATE KOS MODAL */}
       {isCreateOpen && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl border border-slate-100 w-full max-w-xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-3xl border border-line w-full max-w-xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
             {/* Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div className="px-6 py-4 border-b border-line flex items-center justify-between bg-surface-muted/50">
               <div className="flex items-center gap-2">
-                <Home className="w-5 h-5 text-[#FF9900]" />
-                <h3 className="font-bold text-slate-800 text-[15px]">Tambah Kos Baru</h3>
+                <Home className="w-5 h-5 text-brand-700" />
+                <h3 className="font-display tracking-[-0.02em] font-bold text-ink-900 text-[15px]">Tambah Kos Baru</h3>
               </div>
               <button 
                 onClick={() => setIsCreateOpen(false)}
-                className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-all cursor-pointer"
+                className="p-1 rounded-lg hover:bg-surface-muted text-ink-500 hover:text-ink-700 transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -411,56 +411,56 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
             {/* Form */}
             <form onSubmit={handleCreateSubmit} className="p-6 space-y-4 overflow-y-auto flex-1">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Nama Kos</label>
+                <label className="text-xs font-semibold text-ink-500">Nama Kos</label>
                 <input 
                   type="text" 
                   name="name" 
                   required 
                   placeholder="Contoh: Kost Griya Asri Beji"
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Deskripsi Kos</label>
+                <label className="text-xs font-semibold text-ink-500">Deskripsi Kos</label>
                 <textarea 
                   name="description" 
                   required 
                   rows={2}
                   placeholder="Ceritakan tentang kenyamanan, fasilitas, dan detail kos..."
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] resize-none"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 resize-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Harga per Bulan (Rp)</label>
+                  <label className="text-xs font-semibold text-ink-500">Harga per Bulan (Rp)</label>
                   <input 
                     type="number" 
                     name="price" 
                     required 
                     placeholder="1200000"
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Ukuran Kamar</label>
+                  <label className="text-xs font-semibold text-ink-500">Ukuran Kamar</label>
                   <input 
                     type="text" 
                     name="roomSize" 
                     required 
                     placeholder="Contoh: 3x4 m"
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Tipe Gender</label>
+                  <label className="text-xs font-semibold text-ink-500">Tipe Gender</label>
                   <select 
                     name="genderType" 
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] bg-white cursor-pointer"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 bg-white cursor-pointer"
                   >
                     <option value="PUTRA">Putra</option>
                     <option value="PUTRI">Putri</option>
@@ -468,10 +468,10 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                   </select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Kampus Terdekat</label>
+                  <label className="text-xs font-semibold text-ink-500">Kampus Terdekat</label>
                   <select 
                     name="campus" 
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] bg-white cursor-pointer"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 bg-white cursor-pointer"
                   >
                     <option value="UBSI Margonda">UBSI Margonda</option>
                     <option value="UI">UI (Univ Indonesia)</option>
@@ -485,7 +485,7 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Alamat Lengkap</label>
+                <label className="text-xs font-semibold text-ink-500">Alamat Lengkap</label>
                 <input 
                   type="text" 
                   name="address" 
@@ -493,12 +493,12 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                   value={createAddress}
                   onChange={(e) => setCreateAddress(e.target.value)}
                   placeholder="Jl. Margonda Raya No. 45, Beji, Depok"
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Pilih Koordinat Kos (Peta Interaktif)</label>
+                <label className="text-xs font-semibold text-ink-500">Pilih Koordinat Kos (Peta Interaktif)</label>
                 <input type="hidden" name="latitude" value={createLat} />
                 <input type="hidden" name="longitude" value={createLng} />
                 <MapPicker 
@@ -513,10 +513,10 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Akses Transportasi Utama</label>
+                <label className="text-xs font-semibold text-ink-500">Akses Transportasi Utama</label>
                 <select 
                   name="transit" 
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] bg-white cursor-pointer"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 bg-white cursor-pointer"
                 >
                   <option value="Ojek online/kendaraan pribadi">Ojek online/kendaraan pribadi (Skor 40)</option>
                   <option value="Angkot, ojek online/kendaraan pribadi">Angkot, ojek online/kendaraan pribadi (Skor 60)</option>
@@ -526,15 +526,15 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-500">Pilih Fasilitas Kamar & Kos</label>
-                <div className="grid grid-cols-2 gap-4 border border-slate-100 bg-slate-50/50 rounded-2xl p-3.5 max-h-40 overflow-y-auto">
+                <label className="text-xs font-semibold text-ink-500">Pilih Fasilitas Kamar & Kos</label>
+                <div className="grid grid-cols-2 gap-4 border border-line bg-surface-muted/50 rounded-2xl p-3.5 max-h-40 overflow-y-auto">
                   <div>
-                    <h4 className="text-[10px] font-bold uppercase text-slate-400 mb-2">Fasilitas Kamar</h4>
+                    <h4 className="font-display tracking-[-0.02em] text-[10px] font-bold uppercase text-ink-500 mb-2">Fasilitas Kamar</h4>
                     <div className="space-y-2">
                       {allFacilities
                         .filter((f) => f.type === "ROOM")
                         .map((f) => (
-                          <label key={f.id} className="flex items-center gap-2 text-xs text-slate-650 cursor-pointer select-none">
+                          <label key={f.id} className="flex items-center gap-2 text-xs text-ink-700 cursor-pointer select-none">
                             <input 
                               type="checkbox" 
                               name="facilities" 
@@ -547,12 +547,12 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-bold uppercase text-slate-400 mb-2">Fasilitas Umum</h4>
+                    <h4 className="font-display tracking-[-0.02em] text-[10px] font-bold uppercase text-ink-500 mb-2">Fasilitas Umum</h4>
                     <div className="space-y-2">
                       {allFacilities
                         .filter((f) => f.type === "PUBLIC")
                         .map((f) => (
-                          <label key={f.id} className="flex items-center gap-2 text-xs text-slate-650 cursor-pointer select-none">
+                          <label key={f.id} className="flex items-center gap-2 text-xs text-ink-700 cursor-pointer select-none">
                             <input 
                               type="checkbox" 
                               name="facilities" 
@@ -567,17 +567,17 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div className="flex items-center gap-3 pt-4 border-t border-line">
                 <button
                   type="button"
                   onClick={() => setIsCreateOpen(false)}
-                  className="flex-1 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all cursor-pointer"
+                  className="flex-1 py-2.5 rounded-xl border border-line text-xs font-bold text-ink-500 hover:bg-surface-muted transition-all cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 rounded-xl bg-[#FF9900] hover:bg-[#e08800] text-white text-xs font-bold shadow-md shadow-orange-500/10 transition-all cursor-pointer"
+                  className="flex-1 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-600 text-white text-xs font-bold shadow-md shadow-brand-700/10 transition-all cursor-pointer"
                 >
                   Simpan Kos
                 </button>
@@ -590,16 +590,16 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
       {/* EDIT KOS MODAL */}
       {editingKos && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl border border-slate-100 w-full max-w-xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-3xl border border-line w-full max-w-xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
             {/* Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div className="px-6 py-4 border-b border-line flex items-center justify-between bg-surface-muted/50">
               <div className="flex items-center gap-2">
-                <Home className="w-5 h-5 text-[#FF9900]" />
-                <h3 className="font-bold text-slate-800 text-[15px]">Edit Data Kos</h3>
+                <Home className="w-5 h-5 text-brand-700" />
+                <h3 className="font-display tracking-[-0.02em] font-bold text-ink-900 text-[15px]">Edit Data Kos</h3>
               </div>
               <button 
                 onClick={() => setEditingKos(null)}
-                className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-all cursor-pointer"
+                className="p-1 rounded-lg hover:bg-surface-muted text-ink-500 hover:text-ink-700 transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -608,57 +608,57 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
             {/* Form */}
             <form onSubmit={handleUpdateSubmit} className="p-6 space-y-4 overflow-y-auto flex-1">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Nama Kos</label>
+                <label className="text-xs font-semibold text-ink-500">Nama Kos</label>
                 <input 
                   type="text" 
                   name="name" 
                   defaultValue={editingKos.name}
                   required 
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Deskripsi Kos</label>
+                <label className="text-xs font-semibold text-ink-500">Deskripsi Kos</label>
                 <textarea 
                   name="description" 
                   defaultValue={editingKos.description}
                   required 
                   rows={2}
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] resize-none"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 resize-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Harga per Bulan (Rp)</label>
+                  <label className="text-xs font-semibold text-ink-500">Harga per Bulan (Rp)</label>
                   <input 
                     type="number" 
                     name="price" 
                     defaultValue={editingKos.price}
                     required 
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Ukuran Kamar</label>
+                  <label className="text-xs font-semibold text-ink-500">Ukuran Kamar</label>
                   <input 
                     type="text" 
                     name="roomSize" 
                     defaultValue={editingKos.roomSize}
                     required 
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Tipe Gender</label>
+                  <label className="text-xs font-semibold text-ink-500">Tipe Gender</label>
                   <select 
                     name="genderType" 
                     defaultValue={editingKos.genderType}
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] bg-white cursor-pointer"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 bg-white cursor-pointer"
                   >
                     <option value="PUTRA">Putra</option>
                     <option value="PUTRI">Putri</option>
@@ -666,11 +666,11 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                   </select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-500">Kampus Terdekat</label>
+                  <label className="text-xs font-semibold text-ink-500">Kampus Terdekat</label>
                   <select 
                     name="campus" 
                     defaultValue={editingKos.campus}
-                    className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] bg-white cursor-pointer"
+                    className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 bg-white cursor-pointer"
                   >
                     <option value="UBSI Margonda">UBSI Margonda</option>
                     <option value="UI">UI (Univ Indonesia)</option>
@@ -684,19 +684,19 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Alamat Lengkap</label>
+                <label className="text-xs font-semibold text-ink-500">Alamat Lengkap</label>
                 <input 
                   type="text" 
                   name="address" 
                   value={editAddress}
                   onChange={(e) => setEditAddress(e.target.value)}
                   required 
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900]"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Pilih Koordinat Kos (Peta Interaktif)</label>
+                <label className="text-xs font-semibold text-ink-500">Pilih Koordinat Kos (Peta Interaktif)</label>
                 <input type="hidden" name="latitude" value={editLat} />
                 <input type="hidden" name="longitude" value={editLng} />
                 <MapPicker 
@@ -711,11 +711,11 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-500">Akses Transportasi Utama</label>
+                <label className="text-xs font-semibold text-ink-500">Akses Transportasi Utama</label>
                 <select 
                   name="transit" 
                   defaultValue={editingKos.transit}
-                  className="w-full border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#FF9900] bg-white cursor-pointer"
+                  className="w-full border border-line rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-brand-600 bg-white cursor-pointer"
                 >
                   <option value="Ojek online/kendaraan pribadi">Ojek online/kendaraan pribadi (Skor 40)</option>
                   <option value="Angkot, ojek online/kendaraan pribadi">Angkot, ojek online/kendaraan pribadi (Skor 60)</option>
@@ -725,17 +725,17 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-500">Pilih Fasilitas Kamar & Kos</label>
-                <div className="grid grid-cols-2 gap-4 border border-slate-100 bg-slate-50/50 rounded-2xl p-3.5 max-h-40 overflow-y-auto">
+                <label className="text-xs font-semibold text-ink-500">Pilih Fasilitas Kamar & Kos</label>
+                <div className="grid grid-cols-2 gap-4 border border-line bg-surface-muted/50 rounded-2xl p-3.5 max-h-40 overflow-y-auto">
                   <div>
-                    <h4 className="text-[10px] font-bold uppercase text-slate-400 mb-2">Fasilitas Kamar</h4>
+                    <h4 className="font-display tracking-[-0.02em] text-[10px] font-bold uppercase text-ink-500 mb-2">Fasilitas Kamar</h4>
                     <div className="space-y-2">
                       {allFacilities
                         .filter((f) => f.type === "ROOM")
                         .map((f) => {
                           const isChecked = editingKos.facilities?.some((kf) => kf.facilityId === f.id) || false;
                           return (
-                            <label key={f.id} className="flex items-center gap-2 text-xs text-slate-650 cursor-pointer select-none">
+                            <label key={f.id} className="flex items-center gap-2 text-xs text-ink-700 cursor-pointer select-none">
                               <input 
                                 type="checkbox" 
                                 name="facilities" 
@@ -750,14 +750,14 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-bold uppercase text-slate-400 mb-2">Fasilitas Umum</h4>
+                    <h4 className="font-display tracking-[-0.02em] text-[10px] font-bold uppercase text-ink-500 mb-2">Fasilitas Umum</h4>
                     <div className="space-y-2">
                       {allFacilities
                         .filter((f) => f.type === "PUBLIC")
                         .map((f) => {
                           const isChecked = editingKos.facilities?.some((kf) => kf.facilityId === f.id) || false;
                           return (
-                            <label key={f.id} className="flex items-center gap-2 text-xs text-slate-650 cursor-pointer select-none">
+                            <label key={f.id} className="flex items-center gap-2 text-xs text-ink-700 cursor-pointer select-none">
                               <input 
                                 type="checkbox" 
                                 name="facilities" 
@@ -774,17 +774,17 @@ export function AdminKosTable({ kosList, allFacilities }: AdminKosTableProps) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div className="flex items-center gap-3 pt-4 border-t border-line">
                 <button
                   type="button"
                   onClick={() => setEditingKos(null)}
-                  className="flex-1 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all cursor-pointer"
+                  className="flex-1 py-2.5 rounded-xl border border-line text-xs font-bold text-ink-500 hover:bg-surface-muted transition-all cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 rounded-xl bg-[#FF9900] hover:bg-[#e08800] text-white text-xs font-bold shadow-md shadow-orange-500/10 transition-all cursor-pointer"
+                  className="flex-1 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-600 text-white text-xs font-bold shadow-md shadow-brand-700/10 transition-all cursor-pointer"
                 >
                   Simpan Perubahan
                 </button>

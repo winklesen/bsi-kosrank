@@ -16,7 +16,7 @@ export default async function SellerKosPage() {
     <div className="p-8">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold">Kos Saya</h1>
+          <h1 className="font-display text-[26px] md:text-[30px] font-bold tracking-[-0.02em]">Kos Saya</h1>
           <p className="text-muted-foreground text-sm mt-1">{kosList.length} listing aktif</p>
         </div>
         <Link href="/seller/kos/new">
@@ -29,7 +29,7 @@ export default async function SellerKosPage() {
       <div className="bg-white rounded-2xl border border-border overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-border bg-slate-50 text-xs text-muted-foreground uppercase tracking-wider">
+            <tr className="border-b border-border bg-surface-muted text-xs text-muted-foreground uppercase tracking-wider">
               <th className="text-left py-3.5 px-4">Nama Kos</th>
               <th className="text-left py-3.5 px-4">Harga</th>
               <th className="text-left py-3.5 px-4">Tipe</th>
@@ -39,7 +39,7 @@ export default async function SellerKosPage() {
           </thead>
           <tbody className="divide-y divide-border">
             {kosList.map((kos) => (
-              <tr key={kos.id} className="hover:bg-slate-50/60 transition-colors">
+              <tr key={kos.id} className="hover:bg-surface-muted/60 transition-colors">
                 <td className="py-3.5 px-4">
                   <div className="font-medium">{kos.name}</div>
                   <div className="text-xs text-muted-foreground">{kos.address}</div>

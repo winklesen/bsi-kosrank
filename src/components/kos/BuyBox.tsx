@@ -207,43 +207,43 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
   return (
     <>
       {/* ─── Buy Box Sidebar Box ─── */}
-      <div className="bg-white border border-[#D5D9D9] rounded-lg p-5 font-sans text-left shadow-md relative overflow-hidden">
+      <div className="bg-white border border-line rounded-2xl p-5 text-left shadow-[0_4px_16px_rgba(15,15,20,0.06)] relative overflow-hidden">
         {/* Subtle accent border top */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF9900] to-[#FEBD69]" />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-700 to-brand-600" />
         
         {/* Price section */}
-        <div className="flex items-baseline gap-0.5 text-[#0F1111] mb-1">
+        <div className="flex items-baseline gap-0.5 text-ink-900 mb-1">
           <span className="text-[13px] font-normal align-super">Rp</span>
-          <span className="text-[26px] font-extrabold leading-none tracking-tight">
+          <span className="font-display text-[26px] font-bold leading-none tracking-[-0.02em]">
             {price.toLocaleString("id-ID")}
           </span>
-          <span className="text-[12px] text-[#565959] font-normal ml-0.5">/bulan</span>
+          <span className="text-[12px] text-ink-500 font-normal ml-0.5">/bulan</span>
         </div>
 
         {/* Delivery/Survey details */}
-        <div className="text-[13px] text-[#0F1111] mt-3 space-y-2 border-b border-[#F0F2F2] pb-3.5">
+        <div className="text-[13px] text-ink-900 mt-3 space-y-2 border-b border-line pb-3.5">
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#067D62]" />
-            <span>Survei Lokasi: <span className="font-bold text-[#067D62]">Bisa Hari Ini</span></span>
+            <span className="w-2 h-2 rounded-full bg-eco" />
+            <span>Survei Lokasi: <span className="font-semibold text-eco">Bisa Hari Ini</span></span>
           </div>
-          <p className="text-slate-500 text-[12px] leading-relaxed pl-3.5">
+          <p className="text-ink-500 text-[12px] leading-relaxed pl-3.5">
             Kunjungi kos secara langsung bersama pemilik untuk mencocokkan kelayakan fasilitas kamar.
           </p>
         </div>
 
         {/* Owner View vs Seeker View */}
         {isOwner ? (
-          <div className="mt-4 bg-[#FFF8F2] border border-[#FF9900]/30 rounded p-3 text-left">
+          <div className="mt-4 bg-brand-100 border border-brand-600/30 rounded-xl p-3 text-left">
             <div className="flex items-start gap-2">
-              <AlertTriangle className="w-4.5 h-4.5 text-[#FF9900] flex-shrink-0 mt-0.5" />
+              <AlertTriangle className="w-4.5 h-4.5 text-brand-700 flex-shrink-0 mt-0.5" />
               <div className="space-y-1">
-                <span className="font-bold text-[12px] text-[#804000]">Iklan Kos Anda</span>
-                <p className="text-slate-600 text-[11px] leading-relaxed">
+                <span className="font-semibold text-[12px] text-brand-700">Iklan Kos Anda</span>
+                <p className="text-ink-700 text-[11px] leading-relaxed">
                   Ini adalah properti kos yang Anda daftarkan. Anda dapat memantau pengajuan sewa dan pesan masuk dari Dashboard Penjual Anda.
                 </p>
                 <Link 
                   href="/seller" 
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#007185] hover:underline pt-1"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-700 hover:text-brand-600 transition-colors pt-1"
                 >
                   Buka Dashboard Penjual <ArrowRight className="w-3 h-3" />
                 </Link>
@@ -253,31 +253,31 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
         ) : (
           <>
             {/* Availability Status Indicator Banner */}
-            <div className="mt-3.5 bg-[#E7F4F5] border border-[#007185]/20 rounded p-2.5 flex items-center gap-2">
-              <CheckCircle className="w-4.5 h-4.5 text-[#007185]" />
+            <div className="mt-3.5 bg-brand-100 border border-brand-600/20 rounded-xl p-2.5 flex items-center gap-2">
+              <CheckCircle className="w-4.5 h-4.5 text-brand-700" />
               <div className="text-[12px]">
-                <span className="font-bold text-[#007185]">Status Kamar: </span>
-                <span className="text-slate-700">Tersedia untuk disewa</span>
+                <span className="font-semibold text-brand-700">Status Kamar: </span>
+                <span className="text-ink-700">Tersedia untuk disewa</span>
               </div>
             </div>
 
-            {/* Action Buttons with 3D Amazon Bevel Feel */}
-            <div className="mt-4.5 space-y-3">
-              {/* Primary Gold: Ajukan Sewa */}
+            {/* Action Buttons */}
+            <div className="mt-4 space-y-2.5">
+              {/* Primary: Ajukan Sewa */}
               <button 
                 onClick={() => setIsSewaOpen(true)}
-                className="w-full bg-gradient-to-b from-[#FFF0A5] to-[#FFD814] hover:from-[#FFE775] hover:to-[#F7CA00] active:border-[#B59100] text-[#0F1111] border border-[#F2C200] rounded text-[13px] font-semibold h-[38px] shadow-[0_1px_2px_rgba(15,17,17,0.15)] flex items-center justify-center gap-2 transition-all cursor-pointer transform active:translate-y-px"
+                className="w-full bg-brand-700 hover:bg-brand-600 text-white rounded-lg text-[13px] font-semibold h-10 flex items-center justify-center gap-2 transition-all hover:-translate-y-px active:translate-y-0 cursor-pointer"
               >
-                <Calendar className="w-4 h-4 text-slate-800" />
+                <Calendar className="w-4 h-4" />
                 Ajukan Sewa Sekarang
               </button>
 
-              {/* Secondary Orange: Tanya Pemilik */}
+              {/* Secondary: Tanya Pemilik */}
               <button 
                 onClick={handleOpenChat}
-                className="w-full bg-gradient-to-b from-[#FFC48C] to-[#FFA41C] hover:from-[#FFB066] hover:to-[#F3A847] active:border-[#A86B00] text-[#0F1111] border border-[#E59200] rounded text-[13px] font-semibold h-[38px] shadow-[0_1px_2px_rgba(15,17,17,0.15)] flex items-center justify-center gap-2 transition-all cursor-pointer transform active:translate-y-px"
+                className="w-full bg-white hover:bg-brand-100 text-brand-700 border border-brand-600 rounded-lg text-[13px] font-semibold h-10 flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
-                <MessageSquare className="w-4 h-4 text-slate-800" />
+                <MessageSquare className="w-4 h-4" />
                 Tanya Pemilik (Chat App)
               </button>
             </div>
@@ -285,10 +285,10 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
         )}
 
         {/* Trust Signal */}
-        <div className="mt-5 pt-3.5 border-t border-[#F0F2F2] flex items-start gap-2.5 text-[11px] text-[#565959] leading-relaxed">
-          <Shield className="w-4 h-4 text-[#007185] flex-shrink-0 mt-0.5" />
+        <div className="mt-5 pt-3.5 border-t border-line flex items-start gap-2.5 text-[11px] text-ink-500 leading-relaxed">
+          <Shield className="w-4 h-4 text-brand-700 flex-shrink-0 mt-0.5" />
           <span>
-            <strong>Keamanan KosRank.</strong> Data kamar, harga, dan koordinat diverifikasi objektif via metode SPK SAW.
+            <strong className="text-ink-900">Keamanan KosRank.</strong> Data kamar, harga, dan koordinat diverifikasi objektif via metode SPK SAW.
           </span>
         </div>
       </div>
@@ -297,22 +297,23 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
       {/* ─── MODAL 1: AJUKAN SEWA (Direct Lease Slip Style) ──────────────── */}
       <AnimatePresence>
         {isSewaOpen && (
-          <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-[1px]">
+          <div className="fixed inset-0 bg-ink-900/60 z-50 flex items-center justify-center p-4 backdrop-blur-[1px]">
             <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white border border-[#D5D9D9] rounded-lg max-w-md w-full overflow-hidden shadow-2xl"
+              className="bg-white border border-line rounded-2xl max-w-md w-full overflow-hidden shadow-[0_4px_16px_rgba(15,15,20,0.12)]"
             >
               {/* Header */}
-              <div className="bg-[#232F3E] text-white px-4 py-3.5 flex items-center justify-between">
-                <h3 className="font-bold text-[14px] tracking-wide flex items-center gap-2">
-                  <Calendar className="w-4.5 h-4.5 text-[#FF9900]" />
+              <div className="bg-brand-700 text-white px-4 py-3.5 flex items-center justify-between">
+                <h3 className="font-display font-semibold text-[14px] tracking-wide flex items-center gap-2">
+                  <Calendar className="w-4.5 h-4.5 text-brand-100" />
                   Pengajuan Sewa Resmi
                 </h3>
                 <button 
                   onClick={() => setIsSewaOpen(false)}
-                  className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
+                  aria-label="Tutup"
+                  className="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -322,12 +323,12 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
               <div className="p-5 space-y-4">
                 {bookingSuccess ? (
                   <div className="flex flex-col items-center justify-center py-8 text-center space-y-3">
-                    <div className="w-14 h-14 rounded-full bg-[#E7F4F5] flex items-center justify-center">
-                      <CheckCircle className="w-8 h-8 text-[#067D62]" />
+                    <div className="w-14 h-14 rounded-full bg-brand-100 flex items-center justify-center">
+                      <CheckCircle className="w-8 h-8 text-eco" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-[#0F1111] text-[16px]">Pengajuan Sewa Terkirim!</h4>
-                      <p className="text-xs text-slate-500 mt-1.5 max-w-[300px] leading-relaxed">
+                      <h4 className="font-display font-semibold text-ink-900 text-[16px]">Pengajuan Sewa Terkirim!</h4>
+                      <p className="text-xs text-ink-500 mt-1.5 max-w-[300px] leading-relaxed">
                         Data pemesanan sewa Anda telah dicatat di database. Pemilik kos akan segera memberi persetujuan atau menolak via dashboard.
                       </p>
                     </div>
@@ -335,26 +336,26 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                 ) : (
                   <>
                     <div>
-                      <div className="text-[11px] text-[#565959] uppercase tracking-wider font-semibold">Nama Kos</div>
-                      <div className="text-[14px] font-bold text-[#0F1111] mt-0.5">{kosName}</div>
+                      <div className="text-[11px] text-ink-500 uppercase tracking-wider font-semibold">Nama Kos</div>
+                      <div className="text-[14px] font-semibold text-ink-900 mt-0.5">{kosName}</div>
                     </div>
 
                     {/* Receipt Price slip */}
-                    <div className="bg-[#F7FAFA] border border-[#D5D9D9] p-3 rounded-md space-y-2">
+                    <div className="bg-surface-tint border border-line p-3 rounded-xl space-y-2">
                       <div className="flex justify-between items-center text-[12px]">
-                        <span className="text-slate-500">Tarif Kamar</span>
-                        <span className="font-semibold text-[#0F1111]">Rp {price.toLocaleString("id-ID")} /bulan</span>
+                        <span className="text-ink-500">Tarif Kamar</span>
+                        <span className="font-semibold text-ink-900">Rp {price.toLocaleString("id-ID")} /bulan</span>
                       </div>
                       
                       {/* Select Duration */}
-                      <div className="space-y-1 pt-1.5 border-t border-[#D5D9D9]/60">
-                        <label className="block text-[12px] font-bold text-[#0F1111]">
+                      <div className="space-y-1 pt-1.5 border-t border-line">
+                        <label className="block text-[12px] font-semibold text-ink-900">
                           Pilih Jangka Waktu Sewa:
                         </label>
                         <select 
                           value={duration} 
                           onChange={(e) => setDuration(parseInt(e.target.value))}
-                          className="w-full border border-[#D5D9D9] bg-white rounded px-2.5 py-1.5 text-[13px] text-[#0F1111] outline-none focus:border-[#FF9900] cursor-pointer font-sans"
+                          className="w-full border border-line bg-white rounded-lg px-2.5 py-1.5 text-[13px] text-ink-900 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 cursor-pointer"
                         >
                           <option value={1}>1 Bulan</option>
                           <option value={3}>3 Bulan</option>
@@ -365,9 +366,9 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                     </div>
 
                     {/* Total Price Statement */}
-                    <div className="flex justify-between items-baseline pt-3 border-t border-[#F0F2F2]">
-                      <span className="text-[13px] text-[#0f1111] font-semibold">Estimasi Tagihan:</span>
-                      <span className="text-[20px] font-extrabold text-[#B12704] tracking-tight">
+                    <div className="flex justify-between items-baseline pt-3 border-t border-line">
+                      <span className="text-[13px] text-ink-900 font-semibold">Estimasi Tagihan:</span>
+                      <span className="font-display text-[20px] font-bold text-ink-900 tracking-[-0.02em]">
                         Rp {(price * duration).toLocaleString("id-ID")}
                       </span>
                     </div>
@@ -378,15 +379,15 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                         type="checkbox"
                         checked={agreeTerms}
                         onChange={(e) => setAgreeTerms(e.target.checked)}
-                        className="mt-0.5 accent-[#007185] rounded cursor-pointer"
+                        className="mt-0.5 accent-brand-700 rounded cursor-pointer"
                       />
-                      <span className="text-[11px] text-slate-500 leading-normal">
+                      <span className="text-[11px] text-ink-500 leading-normal">
                         Saya menyetujui survei lokasi awal dan berkomitmen mengikuti syarat pengisian sewa di KosRank.
                       </span>
                     </label>
 
                     {bookingError && (
-                      <div className="text-xs text-[#B12704] bg-red-50 border border-red-200 p-2.5 rounded">
+                      <div className="text-xs text-red-600 bg-red-50 border border-red-200 p-2.5 rounded-lg">
                         {bookingError}
                       </div>
                     )}
@@ -395,11 +396,11 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                     <button
                       onClick={handleAjukanSewa}
                       disabled={bookingLoading || !agreeTerms}
-                      className="w-full bg-gradient-to-b from-[#FFF0A5] to-[#FFD814] hover:from-[#FFE775] hover:to-[#F7CA00] disabled:opacity-50 disabled:cursor-not-allowed text-[#0F1111] border border-[#F2C200] rounded text-[13px] font-bold h-[40px] shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="w-full bg-brand-700 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg text-[13px] font-semibold h-10 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
                       {bookingLoading ? (
                         <>
-                          <Loader2 className="w-4.5 h-4.5 animate-spin text-slate-600" />
+                          <Loader2 className="w-4.5 h-4.5 animate-spin" />
                           Memproses Pengajuan...
                         </>
                       ) : (
@@ -415,25 +416,26 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
       </AnimatePresence>
 
 
-      {/* ─── MODAL 2: AUTH REQUIRED PROMPT (Gorgeous themed login request) ─── */}
+      {/* ─── MODAL 2: AUTH REQUIRED PROMPT ─── */}
       <AnimatePresence>
         {isAuthModalOpen && (
-          <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-[1px]">
+          <div className="fixed inset-0 bg-ink-900/60 z-50 flex items-center justify-center p-4 backdrop-blur-[1px]">
             <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white border border-[#D5D9D9] rounded-lg max-w-sm w-full overflow-hidden shadow-2xl font-sans"
+              className="bg-white border border-line rounded-2xl max-w-sm w-full overflow-hidden shadow-[0_4px_16px_rgba(15,15,20,0.12)]"
             >
               {/* Header */}
-              <div className="bg-[#232F3E] text-white px-4 py-3.5 flex items-center justify-between">
-                <h3 className="font-bold text-[14px] tracking-wide flex items-center gap-2">
-                  <Shield className="w-4.5 h-4.5 text-[#FF9900]" />
+              <div className="bg-brand-700 text-white px-4 py-3.5 flex items-center justify-between">
+                <h3 className="font-display font-semibold text-[14px] tracking-wide flex items-center gap-2">
+                  <Shield className="w-4.5 h-4.5 text-brand-100" />
                   Akses Masuk Diperlukan
                 </h3>
                 <button 
                   onClick={() => setIsAuthModalOpen(false)}
-                  className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
+                  aria-label="Tutup"
+                  className="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -441,15 +443,15 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
 
               {/* Body */}
               <div className="p-5 space-y-4 text-left">
-                <p className="text-[13px] text-slate-600 leading-relaxed">
-                  Untuk dapat <span className="font-bold text-[#0F1111]">{authActionName}</span>, Anda wajib masuk (login) terlebih dahulu menggunakan akun pencari kos Anda.
+                <p className="text-[13px] text-ink-700 leading-relaxed">
+                  Untuk dapat <span className="font-semibold text-ink-900">{authActionName}</span>, Anda wajib masuk (login) terlebih dahulu menggunakan akun pencari kos Anda.
                 </p>
 
                 <div className="flex gap-3 pt-2">
                   {/* Cancel */}
                   <button
                     onClick={() => setIsAuthModalOpen(false)}
-                    className="flex-1 bg-white hover:bg-[#F7FAFA] text-[#0F1111] border border-[#D5D9D9] rounded text-[13px] font-semibold h-[36px] transition-colors cursor-pointer"
+                    className="flex-1 bg-white hover:border-brand-600 hover:text-brand-600 text-ink-900 border border-line rounded-lg text-[13px] font-semibold h-9 transition-colors cursor-pointer"
                   >
                     Batal
                   </button>
@@ -460,7 +462,7 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                       setIsAuthModalOpen(false);
                       router.push("/auth/login");
                     }}
-                    className="flex-1 bg-gradient-to-b from-[#FFF0A5] to-[#FFD814] hover:from-[#FFE775] hover:to-[#F7CA00] active:border-[#B59100] text-[#0F1111] border border-[#F2C200] rounded text-[13px] font-bold h-[36px] shadow-sm flex items-center justify-center transition-all cursor-pointer"
+                    className="flex-1 bg-brand-700 hover:bg-brand-600 text-white rounded-lg text-[13px] font-semibold h-9 flex items-center justify-center transition-all hover:-translate-y-px cursor-pointer"
                   >
                     Masuk Sekarang
                   </button>
@@ -472,13 +474,13 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
       </AnimatePresence>
 
 
-      {/* ─── DRAWER: FLOATING CHAT DRAWER (Slides in from Right with custom dot canvas) ─── */}
+      {/* ─── DRAWER: FLOATING CHAT DRAWER ─── */}
       <AnimatePresence>
         {isChatOpen && (
           <>
             {/* Backdrop */}
             <div 
-              className="fixed inset-0 bg-black/50 z-40 backdrop-blur-[0.5px]" 
+              className="fixed inset-0 bg-ink-900/50 z-40 backdrop-blur-[0.5px]" 
               onClick={() => setIsChatOpen(false)}
             />
 
@@ -488,21 +490,21 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 26, stiffness: 220 }}
-              className="fixed top-0 right-0 h-full w-full max-w-[420px] bg-[#F0F2F2] shadow-2xl z-50 flex flex-col border-l border-[#D5D9D9]"
+              className="fixed top-0 right-0 h-full w-full max-w-[420px] bg-surface-muted shadow-2xl z-50 flex flex-col border-l border-line"
             >
               {/* Drawer Header */}
-              <div className="bg-[#232F3E] text-white px-4 h-[64px] flex items-center justify-between border-b border-[#19222d] flex-shrink-0">
+              <div className="bg-brand-700 text-white px-4 h-16 flex items-center justify-between flex-shrink-0">
                 <div className="flex items-center gap-3">
                   {/* Initials Avatar */}
-                  <div className="w-9 h-9 rounded-full bg-[#FF9900] text-[#232F3E] font-extrabold text-[13px] flex items-center justify-center shadow-sm">
+                  <div className="w-9 h-9 rounded-full bg-white text-brand-700 font-display font-bold text-[13px] flex items-center justify-center">
                     {getInitials(kosName)}
                   </div>
                   <div className="flex flex-col text-left">
-                    <span className="text-[13px] font-bold text-white truncate max-w-[220px]">
+                    <span className="font-display text-[13px] font-semibold truncate max-w-[220px]">
                       {kosName}
                     </span>
-                    <span className="text-[10px] text-slate-300 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#067D62] animate-pulse" />
+                    <span className="text-[10px] text-white/80 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-eco animate-pulse" />
                       Pemilik Kos Terverifikasi
                     </span>
                   </div>
@@ -510,7 +512,8 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                 
                 <button 
                   onClick={() => setIsChatOpen(false)}
-                  className="text-slate-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors"
+                  aria-label="Tutup obrolan"
+                  className="text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -520,22 +523,22 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
               <div 
                 className="flex-1 overflow-y-auto p-4 space-y-4"
                 style={{
-                  backgroundImage: "radial-gradient(#007185 0.6px, transparent 0.6px), radial-gradient(#007185 0.6px, #F0F2F2 0.6px)",
+                  backgroundImage: "radial-gradient(#6D3FE0 0.6px, transparent 0.6px), radial-gradient(#6D3FE0 0.6px, #F5F5F7 0.6px)",
                   backgroundSize: "24px 24px",
                   backgroundPosition: "0 0, 12px 12px",
                   opacity: 0.95
                 }}
               >
                 {chatLoading ? (
-                  <div className="flex flex-col items-center justify-center h-full gap-2 text-slate-400">
-                    <Loader2 className="w-7 h-7 animate-spin text-[#007185]" />
+                  <div className="flex flex-col items-center justify-center h-full gap-2 text-ink-500">
+                    <Loader2 className="w-7 h-7 animate-spin text-brand-700" />
                     <span className="text-xs font-semibold">Menghubungkan obrolan...</span>
                   </div>
                 ) : messages.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-full text-center px-6 space-y-2 bg-white/70 backdrop-blur-[2px] rounded-lg m-4 p-6 border border-[#D5D9D9]">
-                    <MessageSquare className="w-10 h-10 text-[#007185] opacity-80" />
-                    <h5 className="font-bold text-[14px] text-[#0F1111]">Mulai Diskusi Kos</h5>
-                    <p className="text-[11px] text-slate-500 leading-relaxed">
+                  <div className="flex flex-col items-center justify-center h-full text-center px-6 space-y-2 bg-white/70 backdrop-blur-[2px] rounded-2xl m-4 p-6 border border-line">
+                    <MessageSquare className="w-10 h-10 text-brand-700 opacity-80" />
+                    <h5 className="font-display font-semibold text-[14px] text-ink-900">Mulai Diskusi Kos</h5>
+                    <p className="text-[11px] text-ink-500 leading-relaxed">
                       Tanyakan langsung kepada pemilik mengenai negosiasi harga, ketersediaan kamar, aturan parkir, atau atur janji temu.
                     </p>
                   </div>
@@ -551,28 +554,28 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                       >
                         {/* Chat bubble avatar */}
                         {!isMe && (
-                          <div className="w-6 h-6 rounded-full bg-[#FF9900] text-[#232F3E] text-[10px] font-bold flex items-center justify-center flex-shrink-0 shadow-sm">
+                          <div className="w-6 h-6 rounded-full bg-brand-700 text-white text-[10px] font-semibold flex items-center justify-center flex-shrink-0">
                             {getInitials(msg.sender.name)}
                           </div>
                         )}
                         
                         <div className="flex flex-col items-end">
                           <div 
-                            className={`rounded-2xl px-3 py-2 text-[13px] shadow-sm leading-relaxed border ${
+                            className={`rounded-2xl px-3 py-2 text-[13px] leading-relaxed border ${
                               isMe 
-                                ? "bg-[#E7F4F5] border-[#007185]/20 text-[#0F1111] rounded-tr-none"
-                                : "bg-white border-[#D5D9D9] text-[#0F1111] rounded-tl-none"
+                                ? "bg-brand-100 border-brand-600/20 text-ink-900 rounded-tr-none"
+                                : "bg-white border-line text-ink-900 rounded-tl-none"
                             }`}
                           >
                             <p className="whitespace-pre-wrap break-words">{msg.text}</p>
                           </div>
                           
                           {/* Timestamp and verify checks */}
-                          <div className="flex items-center gap-1 text-[9px] text-slate-400 mt-1 px-1">
+                          <div className="flex items-center gap-1 text-[9px] text-ink-500 mt-1 px-1">
                             <span>
                               {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                             </span>
-                            {isMe && <span className="text-[#007185] font-bold">✓✓</span>}
+                            {isMe && <span className="text-brand-700 font-semibold">✓✓</span>}
                           </div>
                         </div>
                       </div>
@@ -585,7 +588,7 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
               {/* Form Input Area */}
               <form 
                 onSubmit={handleSendMessage}
-                className="bg-white border-t border-[#D5D9D9] p-3 flex gap-2 items-center flex-shrink-0 shadow-[0_-1px_3px_rgba(0,0,0,0.05)]"
+                className="bg-white border-t border-line p-3 flex gap-2 items-center flex-shrink-0"
               >
                 <input 
                   type="text"
@@ -593,13 +596,14 @@ export function BuyBox({ kosId, kosName, price, ownerId }: BuyBoxProps) {
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Ketik pertanyaan Anda..."
                   disabled={chatLoading || sendingLoading}
-                  className="flex-1 border border-[#D5D9D9] rounded-md px-3 h-[36px] text-[13px] text-[#0F1111] outline-none focus:border-[#FF9900] focus:ring-1 focus:ring-[#FF9900]"
+                  className="flex-1 border border-line rounded-full px-4 h-9 text-[13px] text-ink-900 outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 transition-colors"
                 />
                 
                 <button
                   type="submit"
                   disabled={chatLoading || sendingLoading || !newMessage.trim()}
-                  className="bg-gradient-to-b from-[#FFF0A5] to-[#FFD814] hover:from-[#FFE775] hover:to-[#F7CA00] disabled:from-slate-100 disabled:to-slate-100 disabled:border-slate-200 disabled:text-slate-400 text-[#0F1111] border border-[#F2C200] h-[36px] px-3.5 flex items-center justify-center rounded-md cursor-pointer transition-colors shadow-sm active:translate-y-px"
+                  aria-label="Kirim pesan"
+                  className="bg-brand-700 hover:bg-brand-600 disabled:bg-surface-muted disabled:text-ink-500 disabled:border-line text-white border border-transparent h-9 w-9 flex items-center justify-center rounded-full cursor-pointer transition-colors"
                 >
                   <Send className="w-3.5 h-3.5" />
                 </button>

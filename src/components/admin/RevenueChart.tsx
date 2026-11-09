@@ -121,17 +121,17 @@ export default function RevenueChart({
       <div>
         <div className="flex items-center justify-between mb-1">
           <div className="flex flex-col">
-            <span className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Transaksi Pendapatan</span>
-            <h2 className="font-extrabold text-slate-900 text-[16px] tracking-tight mt-0.5">TRANSAKSI PENDAPATAN</h2>
+            <span className="text-[10px] text-ink-500 font-bold uppercase tracking-wider">Transaksi Pendapatan</span>
+            <h2 className="font-display font-semibold text-ink-900 text-[16px] tracking-[-0.02em] mt-0.5">TRANSAKSI PENDAPATAN</h2>
           </div>
           <span className="text-[10px] uppercase font-extrabold tracking-wider px-2.5 py-0.5 bg-emerald-50 text-[#10B981] rounded-full border border-emerald-100">
             LIVE DATA
           </span>
         </div>
-        <p className="text-xs text-slate-500 mb-6 font-normal">Representasi data grafik nominal transaksi pengajuan sewa 6 bulan terakhir.</p>
+        <p className="text-xs text-ink-500 mb-6 font-normal">Representasi data grafik nominal transaksi pengajuan sewa 6 bulan terakhir.</p>
         
         {/* Custom Interactive SVG Chart */}
-        <div className="w-full relative bg-slate-50/50 rounded-xl border border-slate-100 p-4 overflow-hidden select-none">
+        <div className="w-full relative bg-surface-muted/50 rounded-xl border border-line p-4 overflow-hidden select-none">
           <svg 
             className="w-full h-full min-h-[220px]" 
             viewBox="0 0 560 200" 
@@ -140,16 +140,16 @@ export default function RevenueChart({
           >
             <defs>
               <linearGradient id="glow-target" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#10B981" stopOpacity="0.15" />
-                <stop offset="100%" stopColor="#10B981" stopOpacity="0.0" />
+                <stop offset="0%" stopColor="#6D3FE0" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="#6D3FE0" stopOpacity="0.0" />
               </linearGradient>
               <linearGradient id="glow-terbayar" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.15" />
-                <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.0" />
+                <stop offset="0%" stopColor="#2FB26B" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="#2FB26B" stopOpacity="0.0" />
               </linearGradient>
               <linearGradient id="glow-tunggakan" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#EF4444" stopOpacity="0.1" />
-                <stop offset="100%" stopColor="#EF4444" stopOpacity="0.0" />
+                <stop offset="0%" stopColor="#FFB400" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="#FFB400" stopOpacity="0.0" />
               </linearGradient>
             </defs>
             
@@ -197,9 +197,9 @@ export default function RevenueChart({
             {activeSeries.tunggakan && <path d={tunggakanAreaPath} fill="url(#glow-tunggakan)" />}
             
             {/* Main Curve Lines */}
-            {activeSeries.target && <path d={targetPath} fill="none" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />}
-            {activeSeries.terbayar && <path d={terbayarPath} fill="none" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />}
-            {activeSeries.tunggakan && <path d={tunggakanPath} fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />}
+            {activeSeries.target && <path d={targetPath} fill="none" stroke="#6D3FE0" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />}
+            {activeSeries.terbayar && <path d={terbayarPath} fill="none" stroke="#2FB26B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />}
+            {activeSeries.tunggakan && <path d={tunggakanPath} fill="none" stroke="#FFB400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />}
 
             {/* Crosshairs & Highlights: Render only on hover and when at least one series is active */}
             {hoveredIndex !== null && selectedY !== null && selectedVal !== null && (
@@ -234,13 +234,13 @@ export default function RevenueChart({
             
             {/* Data Points */}
             {activeSeries.target && targetPoints.map((p, idx) => (
-              <circle key={`t-pt-${idx}`} cx={p.x} cy={p.y} r="4" fill="#10B981" stroke="#ffffff" strokeWidth="2" />
+              <circle key={`t-pt-${idx}`} cx={p.x} cy={p.y} r="4" fill="#6D3FE0" stroke="#ffffff" strokeWidth="2" />
             ))}
             {activeSeries.terbayar && terbayarPoints.map((p, idx) => (
-              <circle key={`tb-pt-${idx}`} cx={p.x} cy={p.y} r="4" fill="#3B82F6" stroke="#ffffff" strokeWidth="2" />
+              <circle key={`tb-pt-${idx}`} cx={p.x} cy={p.y} r="4" fill="#2FB26B" stroke="#ffffff" strokeWidth="2" />
             ))}
             {activeSeries.tunggakan && tunggakanPoints.map((p, idx) => (
-              <circle key={`tk-pt-${idx}`} cx={p.x} cy={p.y} r="4" fill="#EF4444" stroke="#ffffff" strokeWidth="2" />
+              <circle key={`tk-pt-${idx}`} cx={p.x} cy={p.y} r="4" fill="#FFB400" stroke="#ffffff" strokeWidth="2" />
             ))}
 
             {/* Tooltips: Render only on hover */}
@@ -251,7 +251,7 @@ export default function RevenueChart({
                   <g>
                     <polygon
                       points={`${centerX},${activeTarget.y - 3} ${centerX - 4},${targetBoxY + 18} ${centerX + 4},${targetBoxY + 18}`}
-                      fill="#10B981"
+                      fill="#6D3FE0"
                     />
                     <rect
                       x={centerX - 85}
@@ -259,7 +259,7 @@ export default function RevenueChart({
                       width="170"
                       height="18"
                       rx="4"
-                      fill="#10B981"
+                      fill="#6D3FE0"
                     />
                     <text x={centerX} y={targetBoxY + 12} textAnchor="middle" fill="#ffffff" fontSize="7.5" fontWeight="bold" fontFamily="sans-serif">
                       Target Pendapatan: {Math.round(activeTarget.val).toLocaleString("id-ID")}
@@ -272,7 +272,7 @@ export default function RevenueChart({
                   <g>
                     <polygon
                       points={`${centerX},${activeTerbayar.y - 3} ${centerX - 4},${terbayarBoxY + 18} ${centerX + 4},${terbayarBoxY + 18}`}
-                      fill="#3B82F6"
+                      fill="#2FB26B"
                     />
                     <rect
                       x={centerX - 75}
@@ -280,7 +280,7 @@ export default function RevenueChart({
                       width="150"
                       height="18"
                       rx="4"
-                      fill="#3B82F6"
+                      fill="#2FB26B"
                     />
                     <text x={centerX} y={terbayarBoxY + 12} textAnchor="middle" fill="#ffffff" fontSize="7.5" fontWeight="bold" fontFamily="sans-serif">
                       Terbayar: {Math.round(activeTerbayar.val).toLocaleString("id-ID")}
@@ -293,7 +293,7 @@ export default function RevenueChart({
                   <g>
                     <polygon
                       points={`${centerX},${activeTunggakan.y - 3} ${centerX - 4},${tunggakanBoxY + 18} ${centerX + 4},${tunggakanBoxY + 18}`}
-                      fill="#EF4444"
+                      fill="#FFB400"
                     />
                     <rect
                       x={centerX - 75}
@@ -301,7 +301,7 @@ export default function RevenueChart({
                       width="150"
                       height="18"
                       rx="4"
-                      fill="#EF4444"
+                      fill="#FFB400"
                     />
                     <text x={centerX} y={tunggakanBoxY + 12} textAnchor="middle" fill="#ffffff" fontSize="7.5" fontWeight="bold" fontFamily="sans-serif">
                       Tunggakan: {Math.round(activeTunggakan.val).toLocaleString("id-ID")}
@@ -331,14 +331,14 @@ export default function RevenueChart({
         </div>
 
         {/* Interactive Legend Buttons with toggling logic */}
-        <div className="flex flex-wrap justify-center gap-6 text-[10.5px] font-bold text-slate-600 mt-4 border-t border-slate-100 pt-3 select-none">
+        <div className="flex flex-wrap justify-center gap-6 text-[10.5px] font-bold text-ink-700 mt-4 border-t border-line pt-3 select-none">
           <button 
             type="button"
             onClick={() => toggleSeries("target")}
             className="flex items-center gap-1.5 hover:opacity-85 transition-all cursor-pointer focus:outline-none"
           >
-            <span className={`w-3.5 h-3.5 rounded border border-white shadow-sm inline-block transition-colors ${activeSeries.target ? "bg-[#10B981]" : "bg-slate-400"}`}></span>
-            <span className={activeSeries.target ? "text-slate-800" : "text-slate-400"}>Target Pendapatan</span>
+            <span className={`w-3.5 h-3.5 rounded border border-white shadow-sm inline-block transition-colors ${activeSeries.target ? "bg-[#6D3FE0]" : "bg-slate-400"}`}></span>
+            <span className={activeSeries.target ? "text-ink-900" : "text-ink-500"}>Target Pendapatan</span>
           </button>
           
           <button 
@@ -346,8 +346,8 @@ export default function RevenueChart({
             onClick={() => toggleSeries("terbayar")}
             className="flex items-center gap-1.5 hover:opacity-85 transition-all cursor-pointer focus:outline-none"
           >
-            <span className={`w-3.5 h-3.5 rounded border border-white shadow-sm inline-block transition-colors ${activeSeries.terbayar ? "bg-[#3B82F6]" : "bg-slate-400"}`}></span>
-            <span className={activeSeries.terbayar ? "text-slate-800" : "text-slate-400"}>Terbayar</span>
+            <span className={`w-3.5 h-3.5 rounded border border-white shadow-sm inline-block transition-colors ${activeSeries.terbayar ? "bg-[#2FB26B]" : "bg-slate-400"}`}></span>
+            <span className={activeSeries.terbayar ? "text-ink-900" : "text-ink-500"}>Terbayar</span>
           </button>
           
           <button 
@@ -355,14 +355,14 @@ export default function RevenueChart({
             onClick={() => toggleSeries("tunggakan")}
             className="flex items-center gap-1.5 hover:opacity-85 transition-all cursor-pointer focus:outline-none"
           >
-            <span className={`w-3.5 h-3.5 rounded border border-white shadow-sm inline-block transition-colors ${activeSeries.tunggakan ? "bg-[#EF4444]" : "bg-slate-400"}`}></span>
-            <span className={activeSeries.tunggakan ? "text-slate-800" : "text-slate-400"}>Tunggakan</span>
+            <span className={`w-3.5 h-3.5 rounded border border-white shadow-sm inline-block transition-colors ${activeSeries.tunggakan ? "bg-[#FFB400]" : "bg-slate-400"}`}></span>
+            <span className={activeSeries.tunggakan ? "text-ink-900" : "text-ink-500"}>Tunggakan</span>
           </button>
         </div>
       </div>
-      <div className="border-t border-slate-100 pt-4 mt-6 flex items-center justify-between text-xs font-semibold text-slate-500">
-        <span>Rasio Konversi Booking: <strong className="text-slate-800">{conversionRate}%</strong></span>
-        <span>Total Pengajuan Aktif: <strong className="text-[#FF9900]">{totalBookings}</strong></span>
+      <div className="border-t border-line pt-4 mt-6 flex items-center justify-between text-xs font-semibold text-ink-500">
+        <span>Rasio Konversi Booking: <strong className="text-ink-900">{conversionRate}%</strong></span>
+        <span>Total Pengajuan Aktif: <strong className="text-brand-600">{totalBookings}</strong></span>
       </div>
     </div>
   );

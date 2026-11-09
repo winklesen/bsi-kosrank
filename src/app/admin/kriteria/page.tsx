@@ -20,8 +20,8 @@ export default async function KriteriaPage() {
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-900">Kriteria & Bobot SAW</h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <h1 className="font-display text-[26px] md:text-[30px] font-bold tracking-[-0.02em] text-ink-900">Kriteria & Bobot SAW</h1>
+        <p className="text-ink-500 text-sm mt-1">
           Kelola bobot kriteria. Total bobot saat ini:{" "}
           <span className={totalWeight.toFixed(2) === "1.00" ? "text-green-600 font-bold" : "text-red-500 font-bold"}>
             {totalWeight.toFixed(2)}
@@ -36,13 +36,13 @@ export default async function KriteriaPage() {
         {/* Criteria List */}
         <div>
           <div className="bg-white rounded-2xl border border-border overflow-hidden mb-6 shadow-sm">
-            <div className="px-5 py-4 border-b border-border bg-slate-50/50">
-              <h2 className="font-bold text-slate-800 text-sm">Daftar Kriteria Penilaian</h2>
+            <div className="px-5 py-4 border-b border-border bg-surface-muted/50">
+              <h2 className="font-display font-semibold tracking-[-0.02em] text-ink-900 text-sm">Daftar Kriteria Penilaian</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border text-xs text-slate-500 uppercase tracking-wider bg-slate-50/20">
+                  <tr className="border-b border-border text-xs text-ink-500 uppercase tracking-wider bg-surface-muted/20">
                     <th className="text-left py-3 px-5 font-bold">Kode</th>
                     <th className="text-left py-3 px-5 font-bold">Nama Kriteria</th>
                     <th className="text-left py-3 px-5 font-bold">Bobot (W)</th>
@@ -52,13 +52,13 @@ export default async function KriteriaPage() {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {criteria.map((c) => (
-                    <tr key={c.id} className="hover:bg-slate-50/50 transition-colors">
-                      <td className="py-3.5 px-5 font-mono font-bold text-[#FF9900]">{c.code}</td>
-                      <td className="py-3.5 px-5 font-semibold text-slate-800">{c.name}</td>
-                      <td className="py-3.5 px-5 font-extrabold text-slate-900">{c.weight.toFixed(2)}</td>
+                    <tr key={c.id} className="hover:bg-surface-muted/50 transition-colors">
+                      <td className="py-3.5 px-5 font-mono font-bold text-brand-600">{c.code}</td>
+                      <td className="py-3.5 px-5 font-semibold text-ink-900">{c.name}</td>
+                      <td className="py-3.5 px-5 font-bold text-ink-900">{c.weight.toFixed(2)}</td>
                       <td className="py-3.5 px-5">
                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
-                          c.attribute === "BENEFIT" ? "bg-green-50 text-green-700 border-green-200" : "bg-orange-50 text-orange-700 border-orange-200"
+                          c.attribute === "BENEFIT" ? "bg-green-50 text-green-700 border-green-200" : "bg-brand-100 text-brand-700 border-brand-600/20"
                         }`}>
                           {c.attribute}
                         </span>
@@ -68,7 +68,7 @@ export default async function KriteriaPage() {
                           "use server";
                           await deleteCriteria(c.id);
                         }}>
-                          <button type="submit" className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
+                          <button type="submit" className="p-1.5 rounded-lg text-ink-500 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </form>
@@ -77,7 +77,7 @@ export default async function KriteriaPage() {
                   ))}
                   {criteria.length === 0 && (
                     <tr>
-                      <td colSpan={5} className="py-8 text-center text-slate-400 text-sm">Belum ada kriteria terdaftar</td>
+                      <td colSpan={5} className="py-8 text-center text-ink-500 text-sm">Belum ada kriteria terdaftar</td>
                     </tr>
                   )}
                 </tbody>
@@ -87,29 +87,29 @@ export default async function KriteriaPage() {
 
           {/* Add Criteria Form */}
           <form action={createCriteria} className="bg-white rounded-2xl border border-border p-5 space-y-4 shadow-sm">
-            <h3 className="font-bold text-slate-800 text-sm border-b border-slate-100 pb-2">Tambah Kriteria Baru</h3>
+            <h3 className="font-display font-semibold tracking-[-0.02em] text-ink-900 text-sm border-b border-line pb-2">Tambah Kriteria Baru</h3>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <Label className="text-xs font-semibold text-slate-500">Kode Kriteria</Label>
+                <Label className="text-xs font-semibold text-ink-500">Kode Kriteria</Label>
                 <Input name="code" placeholder="C6" required className="h-9 rounded-xl text-sm" />
               </div>
               <div className="space-y-1">
-                <Label className="text-xs font-semibold text-slate-500">Bobot W (0-1)</Label>
+                <Label className="text-xs font-semibold text-ink-500">Bobot W (0-1)</Label>
                 <Input name="weight" type="number" step="0.01" min="0" max="1" placeholder="0.20" required className="h-9 rounded-xl text-sm" />
               </div>
             </div>
             <div className="space-y-1">
-              <Label className="text-xs font-semibold text-slate-500">Nama Kriteria</Label>
+              <Label className="text-xs font-semibold text-ink-500">Nama Kriteria</Label>
               <Input name="name" placeholder="Fasilitas Kos" required className="h-9 rounded-xl text-sm" />
             </div>
             <div className="space-y-1">
-              <Label className="text-xs font-semibold text-slate-500">Atribut Kriteria</Label>
+              <Label className="text-xs font-semibold text-ink-500">Atribut Kriteria</Label>
               <select name="attribute" className="w-full border border-input rounded-xl px-3 py-2 text-sm h-9 bg-white">
                 <option value="BENEFIT">BENEFIT (Semakin besar nilai semakin baik)</option>
                 <option value="COST">COST (Semakin kecil nilai semakin baik)</option>
               </select>
             </div>
-            <Button type="submit" size="sm" className="w-full rounded-xl h-10 font-bold bg-[#FF9900] hover:bg-[#e08800] text-white transition-colors cursor-pointer">
+            <Button type="submit" size="sm" className="w-full rounded-xl h-10 font-bold bg-brand-600 hover:bg-brand-700 text-white transition-colors cursor-pointer">
               <Plus className="w-4 h-4 mr-1" /> Simpan Kriteria
             </Button>
           </form>
