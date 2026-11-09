@@ -4,7 +4,7 @@
 
 - Tujuan: menjalankan aplikasi dan PostgreSQL secara lokal dari fresh clone dengan port host yang tidak bentrok.
 - Repo/worktree: `/home/pliskin/src/personal/kuliah/kosrank`, branch `chore/local-docker`, berbasis commit `40ff8ec5599e43c57b41f6609f9ed02f6fb52444`.
-- Status: **PARTIAL**. Setup Docker, build Next.js, type check, dan smoke Playwright lokal lulus; lint repo masih gagal pada masalah aplikasi yang sudah ada. Stack sudah dihentikan untuk pengujian ulang oleh pengguna. Perubahan dicatat dalam commit yang memuat handoff ini dan belum di-push.
+- Status: **PARTIAL**. Setup Docker, build Next.js, type check, dan smoke Playwright lokal lulus; lint repo masih gagal pada masalah aplikasi yang sudah ada. Stack sudah dihentikan untuk pengujian ulang oleh pengguna. Commit setup `74e2074` sudah di-push ke `winklesen/main` pada 2026-11-10; remote `origin` Faiz belum di-push.
 - Penulis perubahan saat handoff: Codex. Pengguna akan menyalakan stack sendiri untuk testing setelah meninjau hasil ini.
 
 ## Perubahan dan keputusan
@@ -36,4 +36,4 @@
 
 ## Lanjutan yang aman
 
-Untuk pengujian pengguna, jalankan `docker compose up -d db app`; volume database yang sudah di-seed dipertahankan. `db push` hanya diperlukan pada database baru atau setelah schema berubah. Runner Playwright dibangun ulang jika paket, konfigurasi, atau tes berubah. Pekerjaan lint dan uji fitur lengkap tetap terpisah dari setup lokal. Jangan menjalankan `docker compose down -v` bila data lokal ingin disimpan.
+Untuk pengujian pengguna, jalankan `docker compose up -d db app`; volume database yang sudah di-seed dipertahankan. `db push` hanya diperlukan pada database baru atau setelah schema berubah. Runner Playwright dibangun ulang jika paket, konfigurasi, atau tes berubah. Lanjutkan perkembangan di repo `winklesen/bsi-kosrank` sampai pengguna menyatakan hasilnya siap, lalu mintakan otorisasi sebelum push ke `origin` Faiz. Pekerjaan lint dan uji fitur lengkap tetap terpisah dari setup lokal. Jangan menjalankan `docker compose down -v` bila data lokal ingin disimpan.
