@@ -1,0 +1,7 @@
+# Build Netlify: Prisma client harus digenerate sebelum next build.
+# DATABASE_URL dan AUTH_SECRET diatur lewat environment variable Netlify, bukan di file ini.
+[build]
+  command = "npx prisma generate && npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
