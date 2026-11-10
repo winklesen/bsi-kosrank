@@ -6,6 +6,9 @@ import { Providers } from "@/components/Providers";
 const sourceSans = Source_Sans_3({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
+// Halaman membaca database; jangan di-prerender saat build agar build tidak bergantung pada koneksi DB.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "KosRank – Temukan Kos Terbaik di Condong Catur",
   description:
